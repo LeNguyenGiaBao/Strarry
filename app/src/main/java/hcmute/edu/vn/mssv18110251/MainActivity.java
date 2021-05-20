@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
 import hcmute.edu.vn.mssv18110251.DAO.CategoryDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
@@ -27,11 +29,13 @@ public class MainActivity extends AppCompatActivity {
 //    private ProductDAO productDAO;
     private CategoryDAO categoryDAO;
     private ProductDAO productDAO;
+    private ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
 //        categoryDAO = new CategoryDAO(this);
@@ -58,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 //        Product product7 = new Product("Omachi", "Sợi khoai tây ngon tuyệt, Rất ngon mà không sợ nóng", 8000, 0, null, 3);
 //        Product product8 = new Product("Shin Ramyun", "Đệ nhất mì cay Hàn Quốc", 22000, 0, null, 3);
 //
-//        productDAO = new ProductDAO(this);
-//        productDAO.open();
+        productDAO = new ProductDAO(this);
+        productDAO.open();
 //        productDAO.addProduct(product);
 //        productDAO.addProduct(product2);
 //        productDAO.addProduct(product3);
@@ -70,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 //        productDAO.addProduct(product8);
 
 //        categoryDAO.Reset();
+
+        recyclerView=findViewById(R.id.recyclerView);
+
+        List<Product> products =  productDAO.getProducts();
+        productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
+
+        recyclerView.setAdapter(productAdapter);
 //        Product product = new Product("Cocacola", "Drink Water", 10000, 0, null, 0);
 
 //        ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(this,

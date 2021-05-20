@@ -49,16 +49,16 @@ public class ProductDAO {
     }
 
     public List<Product> getProducts(){
-        List<Product> accounts = new ArrayList<Product>();
+        List<Product> products = new ArrayList<Product>();
         String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT;
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{
                 Product product = new Product(cursor);
-                accounts.add(product);
+                products.add(product);
             }while (cursor.moveToNext());
         }
-        return accounts;
+        return products;
     }
 
     public int updateProduct(Product product){
