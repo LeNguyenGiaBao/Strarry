@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Strarry</string>
+    <string name="country_prompt">Chọn Địa điểm</string>
+    <string-array name="country_arrays">
+        <item>Tp.HCM</item>
+        <item>Hà Nội</item>
+        <item>Đà Nẵng</item>
+        <item>Cần Thơ</item>
+    </string-array>
+</resources>
