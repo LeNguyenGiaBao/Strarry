@@ -6,11 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ListActivity;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,13 +39,31 @@ public class MainActivity extends AppCompatActivity {
     private CategoryDAO categoryDAO;
     private ProductDAO productDAO;
     private ProductAdapter productAdapter;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        File file = new File("E:\\micay.jpg");
+//        byte[] fileContent = new byte[0];
+//        try {
+//            fileContent = Files.readAllBytes(file.toPath());
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        Bitmap bitmap = null;
+        try {
+            bitmap = BitmapFactory.decodeFile("E:\\image.jpg");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        ByteArrayOutputStream blob = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNGs */, blob);
+        byte[] bitmapdata = blob.toByteArray();
 
 //        categoryDAO = new CategoryDAO(this);
 //        categoryDAO.open();
@@ -61,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 //        Product product6 = new Product("Kokomi", "Dai ngon từng sợi", 4000, 0, null, 3);
 //        Product product7 = new Product("Omachi", "Sợi khoai tây ngon tuyệt, Rất ngon mà không sợ nóng", 8000, 0, null, 3);
 //        Product product8 = new Product("Shin Ramyun", "Đệ nhất mì cay Hàn Quốc", 22000, 0, null, 3);
+        Product product9 = new Product("Samyang", "Mì khô gà cay Hàn Quốc", 25000, 0, bitmapdata, 3);
 //
         productDAO = new ProductDAO(this);
         productDAO.open();
@@ -72,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
 //        productDAO.addProduct(product6);
 //        productDAO.addProduct(product7);
 //        productDAO.addProduct(product8);
+        productDAO.addProduct(product9);
 
 //        categoryDAO.Reset();
 

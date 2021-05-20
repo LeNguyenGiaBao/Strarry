@@ -1,9 +1,12 @@
 package hcmute.edu.vn.mssv18110251.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +44,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Locale locale = new Locale("vn", "VN");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         holder.productPrice.setText(currencyFormatter.format(product.getPrice()));
+        holder.productDescription.setText(product.getDescription());
+        byte[] bitmapdata = product.getImage();
+//        Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length);
+//        holder.imageView.setImageBitmap(bitmap);
 //        holder.imgAvatar.setImageResource(sanPham.getHinhSanPham());
     }
 
@@ -50,8 +57,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-//        ImageView imgAvatar;
-        TextView productName, productPrice;
+        ImageView imageView;
+        TextView productName, productPrice, productDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,7 +66,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 //            imgAvatar = itemView.findViewById(R.id.imgAvatar);
             productPrice = itemView.findViewById(R.id.productPrice);
             productName = itemView.findViewById(R.id.productName);
-
+            productDescription = itemView.findViewById(R.id.productDescription);
+            imageView = itemView.findViewById(R.id.productImage);
         }
     }
 }

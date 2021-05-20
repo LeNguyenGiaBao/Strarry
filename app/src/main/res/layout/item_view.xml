@@ -28,7 +28,7 @@
             <ImageView
                 android:layout_width="88dp"
                 android:layout_height="88dp"
-                android:id="@+id/coffeeImage"
+                android:id="@+id/productImage"
                 android:layout_marginTop="4dp"/>
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/productPrice"
                 android:layout_toRightOf="@+id/coffeeImage"
-                android:id="@+id/clickheretoorder"
+                android:id="@+id/productDescription"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
                 tools:text="Click  to Order"/>
