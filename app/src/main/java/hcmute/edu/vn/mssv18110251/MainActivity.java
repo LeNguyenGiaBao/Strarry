@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,15 +43,16 @@ public class MainActivity extends AppCompatActivity {
     private CategoryDAO categoryDAO;
     private ProductDAO productDAO;
     private ProductAdapter productAdapter;
-    
+
+    Button product_manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        categoryDAO = new CategoryDAO(this);
-//        categoryDAO.open();
+        categoryDAO = new CategoryDAO(this);
+        categoryDAO.open();
 //        Category category = new Category("Water");
 //        Category category2 = new Category("Milk");
 //        Category category3 = new Category("Noddle");
@@ -94,24 +96,15 @@ public class MainActivity extends AppCompatActivity {
         productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
 
         recyclerView.setAdapter(productAdapter);
-//        Product product = new Product("Cocacola", "Drink Water", 10000, 0, null, 0);
 
-//        ArrayAdapter<Product> adapter = new ArrayAdapter<Product>(this,
-//                android.R.layout.simple_list_item_1, values);
-//        setListAdapter(adapter);
-//
-//        btn_add = (Button)findViewById(R.id.add);
-//        btn_add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ArrayAdapter<Product> adapter = (ArrayAdapter<Product>) getListAdapter();
-//                String[] product_list_name = new String[]{"Event1", "Event2", "Event3"};
-//                int nextInt = new Random().nextInt(3);
-//
-//                productDAO.addProduct(product_list_name[nextInt]);
-//                adapter.add(event);
-//            }
-//        });
-
+        product_manager = (Button)findViewById(R.id.btn_event);
+        product_manager.setWidth(100);
+        product_manager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ProductManage.class);
+                startActivity(intent);
+            }
+        });
     }
 }
