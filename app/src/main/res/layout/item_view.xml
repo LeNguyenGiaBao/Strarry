@@ -8,8 +8,6 @@
     tools:context=".MainActivity">
 
 
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -40,7 +38,7 @@
                 android:layout_below="@+id/productName"
                 android:layout_marginLeft="12dp"
                 android:id="@+id/productPrice"
-                android:layout_toRightOf="@+id/coffeeImage"/>
+                android:layout_toRightOf="@+id/productImage"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,20 +47,18 @@
                 android:id="@+id/productName"
                 android:textStyle="italic"
                 android:textSize="26sp"
-                android:layout_toRightOf="@+id/coffeeImage"
+                android:layout_toRightOf="@+id/productImage"
                 tools:text="Green Tea"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/productPrice"
-                android:layout_toRightOf="@+id/coffeeImage"
+                android:layout_toRightOf="@+id/productImage"
                 android:id="@+id/productDescription"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
                 tools:text="Click  to Order"/>
-
-
 
 
         </RelativeLayout>
