@@ -5,4 +5,8 @@
     <dimen name="paddingBot">10dp</dimen>
     <dimen name="paddingLeft">10dp</dimen>
     <dimen name="paddingRight">10dp</dimen>
+
+    <dimen name="headerTextSize">25sp</dimen>
+    <dimen name="newsMoreTextSize">12sp</dimen>
+    <dimen name="loginViewsMargin">20dp</dimen>
 </resources>

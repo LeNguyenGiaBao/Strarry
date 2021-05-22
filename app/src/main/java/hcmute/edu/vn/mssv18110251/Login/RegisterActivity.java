@@ -1,14 +1,15 @@
-package hcmute.edu.vn.mssv18110251;
+package hcmute.edu.vn.mssv18110251.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import hcmute.edu.vn.mssv18110251.R;
 
-public class MainActivity2 extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_register);
     }
 }
