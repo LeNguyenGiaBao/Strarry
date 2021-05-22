@@ -7,4 +7,6 @@
         <item>Đà Nẵng</item>
         <item>Cần Thơ</item>
     </string-array>
+
+    <string name="action_settings">Settings</string>
 </resources>

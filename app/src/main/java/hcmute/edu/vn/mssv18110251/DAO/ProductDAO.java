@@ -37,7 +37,8 @@ public class ProductDAO {
         dbHelper.close();
     }
 
-    public void addProduct(Product product){
+    public boolean addProduct(Product product){
+        this.open();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_NAME_PRODUCT, product.getName());
         values.put(DatabaseHelper.COLUMN_DESCRIPTION_PRODUCT, product.getDescription());
@@ -45,7 +46,11 @@ public class ProductDAO {
         values.put(DatabaseHelper.COLUMN_QUANTITY_PRODUCT, product.getQuantity());
         values.put(DatabaseHelper.COLUMN_IMAGE_PRODUCT, product.getImage());
         values.put(DatabaseHelper.COLUMN_ID_CATEGORY, product.getId_category());
-        database.insert(DatabaseHelper.TABLE_PRODUCT, null, values);
+        long success = database.insert(DatabaseHelper.TABLE_PRODUCT, null, values);
+        if(success!=-1){
+            return true;
+        }
+        return false;
     }
 
     public List<Product> getProducts(){

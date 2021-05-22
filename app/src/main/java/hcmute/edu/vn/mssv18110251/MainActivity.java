@@ -107,4 +107,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        List<Product> products =  productDAO.getProducts();
+        productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
+
+        recyclerView.setAdapter(productAdapter);
+    }
 }

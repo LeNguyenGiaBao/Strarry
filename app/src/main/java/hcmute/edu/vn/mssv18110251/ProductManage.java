@@ -1,9 +1,13 @@
 package hcmute.edu.vn.mssv18110251;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -13,6 +17,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +40,7 @@ public class ProductManage extends AppCompatActivity {
     EditText name_product, description_product, price, quantity;
     ProductDAO productDAO;
     Bitmap image_product;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,61 +50,78 @@ public class ProductManage extends AppCompatActivity {
         description_product = (EditText)findViewById(R.id.description_product);
         price = (EditText)findViewById(R.id.price_product);
         quantity = (EditText)findViewById(R.id.quantity_product);
+        imageView = (ImageView) findViewById(R.id.imgView);
 
-        openGallery = (Button)findViewById(R.id.btn_load_image);
-        openGallery.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // check runtime permission
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
-                        // permission not granted, request it
-                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, PERMISSION_CODE);
-                    } else {
-                        // permission already granted
-                        Intent i = new Intent(
-                                Intent.ACTION_PICK,
-                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(i, RESULT_LOAD_IMAGE);
-                    }
-                }
-                else {
-                    // system os is less then marshmallow
-                    Intent i = new Intent(
-                            Intent.ACTION_PICK,
-                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, RESULT_LOAD_IMAGE);
-                }
+                selectImage(ProductManage.this);
             }
         });
 
 
+//        openGallery = (Button)findViewById(R.id.btn_load_image);
+//        openGallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // check runtime permission
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+//                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+//                        // permission not granted, request it
+//                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+//                        requestPermissions(permissions, PERMISSION_CODE);
+//                    } else {
+//                        // permission already granted
+//                        Intent i = new Intent(
+//                                Intent.ACTION_PICK,
+//                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                        startActivityForResult(i, RESULT_LOAD_IMAGE);
+//                    }
+//                }
+//                else {
+//                    // system os is less then marshmallow
+//                    Intent i = new Intent(
+//                            Intent.ACTION_PICK,
+//                            android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(i, RESULT_LOAD_IMAGE);
+//                }
+//            }
+//        });
+
+
         productDAO = new ProductDAO(this);
-        productDAO.open();
 
         addProduct = (Button)findViewById(R.id.btn_add_product);
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String nameProduct = name_product.getText().toString();
                 String descriptionProduct = description_product.getText().toString();
                 Integer priceProduct = Integer.parseInt(price.getText().toString());
                 Integer quantityProduct = Integer.parseInt(quantity.getText().toString());
+                byte[] byteArray = null;
+                Log.d("CREATION", image_product.toString());
                 if(image_product!=null) {
+                    Log.d("CREATION", "Co hinh nha");
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     image_product.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    byte[] byteArray = stream.toByteArray();
+                    byteArray = stream.toByteArray();
                     image_product.recycle();
-                    Product product = new Product(nameProduct, descriptionProduct, priceProduct, quantityProduct, byteArray, 1);
-                    productDAO.addProduct(product);
                 }
-                else{
-                    Product product = new Product(nameProduct, descriptionProduct, priceProduct, quantityProduct, null, 1);
-                    productDAO.addProduct(product);
+                Product product = new Product(nameProduct, descriptionProduct, priceProduct, quantityProduct, byteArray, 1);
+                if(productDAO.addProduct(product)){
+                    Toast.makeText(ProductManage.this, "Product has been added successfully!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ProductManage.this, "Error!", Toast.LENGTH_LONG).show();
                 }
-
+                name_product.setText("");
+                description_product.setText("");
+                price.setText("");
+                quantity.setText("");
+                imageView.setImageResource(R.drawable.ic_baseline_add_photo_alternate_24);
             }
         });
     }
@@ -123,23 +148,126 @@ public class ProductManage extends AppCompatActivity {
         }
     }
 
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+//
+//
+//            Uri selectedImage = data.getData();
+//            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+//            Cursor cursor = getContentResolver().query(selectedImage,
+//                    filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//            image_product = BitmapFactory.decodeFile(picturePath);
+//            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+//        }
+//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        image_product = selectedImage;
+                        imageView.setImageBitmap(selectedImage);
+                    }
 
+                    break;
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Uri selectedImage = data.getData();
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        if (selectedImage != null) {
+                            Cursor cursor = getContentResolver().query(selectedImage,
+                                    filePathColumn, null, null, null);
+                            if (cursor != null) {
+                                cursor.moveToFirst();
 
-            Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getContentResolver().query(selectedImage,
-                    filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            ImageView imageView = (ImageView) findViewById(R.id.imgView);
-            image_product = BitmapFactory.decodeFile(picturePath);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                                String picturePath = cursor.getString(columnIndex);
+                                image_product = BitmapFactory.decodeFile(picturePath);
+                                imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                                cursor.close();
+                            }
+                        }
+
+                    }
+                    break;
+            }
         }
+    }
+
+    private void selectImage(Context context) {
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose your profile picture");
+
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+
+                if (options[item].equals("Take Photo")) {
+                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePicture, 0);
+
+                } else if (options[item].equals("Choose from Gallery")) {
+                    // check runtime permission
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+                            // permission not granted, request it
+                            String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                            requestPermissions(permissions, PERMISSION_CODE);
+                        } else {
+                            // permission already granted
+                            Intent i = new Intent(
+                                    Intent.ACTION_PICK,
+                                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(i, 1);
+                        }
+                    }
+                    else {
+                        // system os is less then marshmallow
+                        Intent i = new Intent(
+                                Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(i, 1);
+                    }
+//                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    startActivityForResult(pickPhoto, 1);//one can be replaced with any action code
+
+                } else if (options[item].equals("Cancel")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_image_capture, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
