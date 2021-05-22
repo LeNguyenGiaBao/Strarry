@@ -3,8 +3,11 @@ package hcmute.edu.vn.mssv18110251;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -21,6 +24,7 @@ public class DetailProduct extends AppCompatActivity {
     private ProductDAO productDAO;
     TextView productName;
     TextView productPrice;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +52,10 @@ public class DetailProduct extends AppCompatActivity {
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         productPrice.setText(currencyFormatter.format(product.getPrice()));
 
+        imageView = findViewById(R.id.productImage);
+        if(product.getImage()!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+            imageView.setImageBitmap(bitmap);
+        }
     }
 }

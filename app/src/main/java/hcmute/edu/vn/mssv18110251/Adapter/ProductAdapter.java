@@ -48,7 +48,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         holder.productPrice.setText(currencyFormatter.format(product.getPrice()));
         holder.productDescription.setText(product.getDescription());
-
+        if(product.getImage()!=null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(product.getImage(), 0, product.getImage().length);
+            holder.imageView.setImageBitmap(bitmap);
+        }
     }
 
     @Override
