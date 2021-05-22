@@ -79,6 +79,7 @@
                 android:layout_marginTop="@dimen/loginViewsMargin"/>
 
             <TextView
+                android:id="@+id/go_to_register"
                 style="@style/parent"
                 android:textAlignment="center"
                 android:textStyle="bold"
