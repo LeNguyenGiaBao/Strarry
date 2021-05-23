@@ -50,12 +50,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_GENDER_ACCOUNT = "gender_account";
     private static final String DATABASE_CREATE_ACCOUNT = "create table " + TABLE_ACCOUNT + "( "
             + COLUMN_ID_ACCOUNT + " integer primary key autoincrement, "
-            + COLUMN_NAME_ACCOUNT + " text not null, "
+            + COLUMN_NAME_ACCOUNT + " text, "
             + COLUMN_PASSWORD_ACCOUNT + " text not null, "
             + COLUMN_PHONE_ACCOUNT + " text, "
             + COLUMN_ADDRESS_ACCOUNT + " text, "
             + COLUMN_ROLE_ACCOUNT + " integer, "
-            + COLUMN_EMAIL_ACCOUNT + " text, "
+            + COLUMN_EMAIL_ACCOUNT + " text not null, "
             + COLUMN_GENDER_ACCOUNT + " text);";
 
     // bill

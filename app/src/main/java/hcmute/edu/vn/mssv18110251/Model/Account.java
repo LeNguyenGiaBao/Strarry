@@ -1,5 +1,7 @@
 package hcmute.edu.vn.mssv18110251.Model;
 
+import android.database.Cursor;
+
 public class Account {
     private int id;
     private String name;
@@ -10,8 +12,8 @@ public class Account {
     private String email;
     private String gender;
 
-    public Account(int id, String name, String password, String phone, String address, int role, String email, String gender) {
-        this.id = id;
+
+    public Account(String name, String password, String phone, String address, int role, String email, String gender) {
         this.name = name;
         this.password = password;
         this.phone = phone;
@@ -19,6 +21,17 @@ public class Account {
         this.role = role;
         this.email = email;
         this.gender = gender;
+    }
+
+    public Account(Cursor cursor) {
+        this.id = cursor.getInt(cursor.getColumnIndex("id_account"));
+        this.name = cursor.getString(cursor.getColumnIndex("name_account"));
+        this.password = cursor.getString(cursor.getColumnIndex("password_account"));
+        this.phone = cursor.getString(cursor.getColumnIndex("phone_account"));
+        this.address = cursor.getString(cursor.getColumnIndex("address_account"));
+        this.role = cursor.getInt(cursor.getColumnIndex("role_account"));
+        this.email = cursor.getString(cursor.getColumnIndex("email_account"));
+        this.gender = cursor.getString(cursor.getColumnIndex("gender_account"));
     }
 
     public int getId() {

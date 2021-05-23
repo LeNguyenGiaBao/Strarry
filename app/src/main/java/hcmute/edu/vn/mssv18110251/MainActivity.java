@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 //        productDAO.addProduct(product8);
 //        productDAO.addProduct(product9);
 
-//        categoryDAO.Reset();
+        categoryDAO.Reset();
 
         recyclerView=findViewById(R.id.recyclerView);
 
