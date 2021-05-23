@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
+import hcmute.edu.vn.mssv18110251.MainActivity;
 import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.R;
 
@@ -46,11 +47,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email_string = email.getText().toString();
                 String password_string = password.getText().toString();
-                Toast.makeText(LoginActivity.this, email_string, Toast.LENGTH_SHORT);
+//                Toast.makeText(getApplicationContext(), "email_string", Toast.LENGTH_SHORT).show();
                 Account account = accountDAO.checkAccount(email_string, password_string);
-
                 if(account != null){
-                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(homePage);
                 }
             }
         });

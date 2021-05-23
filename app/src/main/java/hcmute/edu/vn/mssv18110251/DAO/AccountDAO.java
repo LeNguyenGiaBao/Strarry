@@ -53,12 +53,13 @@ public class AccountDAO {
     }
 
     public Account checkAccount(String email, String password){
-        String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " WHERE email_account ='" + email + "' and password_account ='" + password + "'";
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " where email_account = '" + email + "' and password_account = '" + password + "'";
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{
+                Log.d("CHECK", "account.getEmail()");
                 Account account = new Account(cursor);
-                Log.d("CHECK", account.getEmail());
+
                 return account;
             }while (cursor.moveToNext());
         }
