@@ -8,9 +8,10 @@
     tools:context=".DetailProduct">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
         android:id="@+id/firstCardView"
-        android:layout_height="320dp"
+        android:layout_height="480dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         android:layout_centerHorizontal="true">
@@ -21,8 +22,8 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/productImage"/>
 
@@ -49,12 +50,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:layout_below="@+id/productImage"
                 android:layout_alignParentRight="true" />
-
-
-
 
         </RelativeLayout>
 
@@ -105,43 +103,25 @@
                 android:background="@drawable/minus"/>
 
 
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/radioGroup"
-                android:layout_below="@id/subquantity">
-
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hot"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/hotradioButton"/>
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Iced"
-                    android:id="@+id/coldRadioButton"/>
-
-            </RadioGroup>
-
-
-
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Description: "
+                android:id="@+id/txt_description"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:layout_below="@+id/addquantity"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="So good."
                 android:id="@+id/descriptioninfo"
                 android:textStyle="italic"
                 android:textSize="15sp"
-                android:layout_below="@+id/radioGroup"/>
+                android:layout_below="@+id/txt_description"/>
 
 
             <Button
