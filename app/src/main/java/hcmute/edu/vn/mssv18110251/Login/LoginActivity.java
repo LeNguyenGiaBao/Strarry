@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), "email_string", Toast.LENGTH_SHORT).show();
                 Account account = accountDAO.checkAccount(email_string, password_string);
                 if(account != null){
-                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
                     Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(homePage);
                 }

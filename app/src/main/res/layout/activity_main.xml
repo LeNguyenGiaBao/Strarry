@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/header_title"
-        app:layout_constraintBottom_toTopOf="@id/footer"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
@@ -98,79 +98,74 @@
 <!--            android:text="this is text"></Button>-->
 <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="horizontal">
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/footer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:orientation="horizontal">-->
 
-        <Button
-            android:id="@+id/btn_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:drawableTop="@drawable/ic_baseline_fastfood_24"
-            android:text="Product"
-            android:textSize="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <Button
-            android:id="@+id/btn_event"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:drawableTop="@drawable/ic_baseline_event_available_24"
-            android:text="Event"
-            android:textSize="10dp"
-            app:layout_constraintLeft_toRightOf="@id/btn_product"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <Button
-            android:id="@+id/btn_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:drawableTop="@drawable/ic_baseline_manage_accounts_24"
-            android:text="Account"
-            android:textSize="10dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <Button
-            android:id="@+id/btn_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
-            android:drawableTop="@drawable/ic_baseline_notifications_24"
-            android:text="Notification"
-            android:textSize="10dp"
-            app:layout_constraintRight_toLeftOf="@id/btn_account"
-            app:layout_constraintTop_toTopOf="parent"/>
 <!--        <Button-->
+<!--            android:id="@+id/btn_product"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:textColor="@color/black"-->
 <!--            android:backgroundTint="@color/white"-->
-<!--            android:id="@+id/ButtonTest"-->
 <!--            android:drawableTop="@drawable/ic_baseline_fastfood_24"-->
 <!--            android:text="Product"-->
-<!--            android:textSize="10dp"/>-->
+<!--            android:textSize="10dp"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
 <!--        <Button-->
+<!--            android:id="@+id/btn_event"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
 <!--            android:textColor="@color/black"-->
 <!--            android:backgroundTint="@color/white"-->
+<!--            android:drawableTop="@drawable/ic_baseline_event_available_24"-->
+<!--            android:text="Event"-->
+<!--            android:textSize="10dp"-->
+<!--            app:layout_constraintLeft_toRightOf="@id/btn_product"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--        <Button-->
 <!--            android:id="@+id/btn_account"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:backgroundTint="@color/white"-->
 <!--            android:drawableTop="@drawable/ic_baseline_manage_accounts_24"-->
 <!--            android:text="Account"-->
-<!--            android:textSize="10dp"/>-->
+<!--            android:textSize="10dp"-->
+<!--            app:layout_constraintRight_toRightOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btn_notification"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:backgroundTint="@color/white"-->
+<!--            android:drawableTop="@drawable/ic_baseline_notifications_24"-->
+<!--            android:text="Notification"-->
+<!--            android:textSize="10dp"-->
+<!--            app:layout_constraintRight_toLeftOf="@id/btn_account"-->
+<!--            app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/primaryTextColor"
+        app:itemTextColor="@color/primaryTextColor"
+        app:menu="@menu/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

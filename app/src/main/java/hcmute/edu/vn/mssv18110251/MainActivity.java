@@ -1,38 +1,24 @@
 package hcmute.edu.vn.mssv18110251;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
 import hcmute.edu.vn.mssv18110251.DAO.CategoryDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
-import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
-import hcmute.edu.vn.mssv18110251.Model.Category;
 import hcmute.edu.vn.mssv18110251.Model.Product;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,13 +29,43 @@ public class MainActivity extends AppCompatActivity {
     private CategoryDAO categoryDAO;
     private ProductDAO productDAO;
     private ProductAdapter productAdapter;
+    private ActionBar toolbar;
 
     Button product_manager;
+    Intent event_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = getSupportActionBar();
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_product:
+                        return true;
+                    case R.id.navigation_event:
+                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
+                        startActivity(event_intent);
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.navigation_notification:
+                        return true;
+//                    case R.id.history:
+//                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);
+//                        startActivity(intentNext);
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                }
+                return false;
+            }
+        });
+
+//        toolbar.setTitle("Shop");
 
         categoryDAO = new CategoryDAO(this);
         categoryDAO.open();
@@ -88,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 //        productDAO.addProduct(product8);
 //        productDAO.addProduct(product9);
 
-        categoryDAO.Reset();
+//        categoryDAO.Reset();
 
         recyclerView=findViewById(R.id.recyclerView);
 
@@ -97,15 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(productAdapter);
 
-        product_manager = (Button)findViewById(R.id.btn_event);
-        product_manager.setWidth(100);
-        product_manager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), ProductManage.class);
-                startActivity(intent);
-            }
-        });
+//        product_manager = (Button)findViewById(R.id.btn_event);
+//        product_manager.setWidth(100);
+//        product_manager.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getBaseContext(), ProductManage.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -116,4 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(productAdapter);
     }
+
+
 }

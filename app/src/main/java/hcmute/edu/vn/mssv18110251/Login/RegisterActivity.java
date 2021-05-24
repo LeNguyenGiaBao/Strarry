@@ -55,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean success = accountDAO.addAccount(account);
                     if(success) {
                         Toast.makeText(RegisterActivity.this, "Successful", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }
                 else{

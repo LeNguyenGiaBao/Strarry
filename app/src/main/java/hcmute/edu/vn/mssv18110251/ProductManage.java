@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.io.ByteArrayOutputStream;
 
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
@@ -36,11 +38,13 @@ public class ProductManage extends AppCompatActivity {
     private static int RESULT_LOAD_IMAGE = 1000;
     public static int PERMISSION_CODE = 1001;
 
-    Button addProduct, openGallery;
+    Button addProduct, go_to_home;
     EditText name_product, description_product, price, quantity;
     ProductDAO productDAO;
     Bitmap image_product;
     ImageView imageView;
+
+    Intent product_intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,32 @@ public class ProductManage extends AppCompatActivity {
                 selectImage(ProductManage.this);
             }
         });
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_event:
+                        return true;
+                    case R.id.navigation_product:
+//                        product_intent = new Intent(getApplicationContext(), MainActivity.class);
+//                        startActivity(product_intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                        return true;
+                    case R.id.navigation_notification:
+                        return true;
+//                    case R.id.history:
+//                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);
+//                        startActivity(intentNext);
+//                        overridePendingTransition(0, 0);
+//                        return true;
+                }
+                return false;
+            }
+        });
+
 
 
 //        openGallery = (Button)findViewById(R.id.btn_load_image);
@@ -102,8 +132,8 @@ public class ProductManage extends AppCompatActivity {
                 String descriptionProduct = description_product.getText().toString();
                 Integer priceProduct = Integer.parseInt(price.getText().toString());
                 Integer quantityProduct = Integer.parseInt(quantity.getText().toString());
-                byte[] byteArray = null;
-                Log.d("CREATION", image_product.toString());
+                byte[] byteArray = new byte[0];
+//                Log.d("CREATION", image_product.toString());
                 if(image_product!=null) {
                     Log.d("CREATION", "Co hinh nha");
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();

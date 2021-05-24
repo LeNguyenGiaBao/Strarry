@@ -134,14 +134,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/navigation">
 
         <Button
             android:id="@+id/btn_add_product"
-            android:layout_width="match_parent"
+            style="@style/loginButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16dp"
             android:text="Add Product" />
 
 
@@ -152,6 +156,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/primaryTextColor"
+        app:itemTextColor="@color/primaryTextColor"
+        app:menu="@menu/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 
 
