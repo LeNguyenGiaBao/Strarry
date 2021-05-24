@@ -67,6 +67,7 @@ public class ProductManage extends AppCompatActivity {
         });
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_event);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,8 +77,8 @@ public class ProductManage extends AppCompatActivity {
                     case R.id.navigation_product:
 //                        product_intent = new Intent(getApplicationContext(), MainActivity.class);
 //                        startActivity(product_intent);
-                        overridePendingTransition(0, 0);
                         finish();
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation_notification:
                         return true;
@@ -300,4 +301,6 @@ public class ProductManage extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

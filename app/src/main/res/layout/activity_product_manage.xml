@@ -159,8 +159,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:itemBackground="@color/white"
-        app:itemIconTint="@color/primaryTextColor"
-        app:itemTextColor="@color/primaryTextColor"
+        app:itemIconTint="@color/custom_color_bottom_navigato_bar"
+        app:itemTextColor="@color/custom_color_bottom_navigato_bar"
         app:menu="@menu/navigation"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
