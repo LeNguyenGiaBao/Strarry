@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = getSupportActionBar();
+//        toolbar = getSupportActionBar();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,21 +47,21 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.navigation_product:
-                        return true;
+                        break;
                     case R.id.navigation_event:
-                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
-                        startActivity(event_intent);
+//                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
+//                        startActivity(event_intent);
                         overridePendingTransition(0, 0);
-                        return true;
+                        break;
                     case R.id.navigation_notification:
-                        return true;
+                        break;
 //                    case R.id.history:
 //                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);
 //                        startActivity(intentNext);
 //                        overridePendingTransition(0, 0);
 //                        return true;
                 }
-                return false;
+                return true;
             }
         });
 

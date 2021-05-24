@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/navigation_product"
-        android:icon="@drawable/ic_baseline_fastfood_24"
-        android:title="" />
+        android:icon="@drawable/ic_strawberry"
+        android:title="Product" />
 
     <item
         android:id="@+id/navigation_event"
         android:icon="@drawable/ic_baseline_event_available_24"
-        android:title="" />
+        android:title="Event" />
 
     <item
         android:id="@+id/navigation_notification"
         android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="" />
+        android:title="Notification" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_manage_accounts_24"
-        android:title="" />
+        android:title="Account" />
 
 </menu>
