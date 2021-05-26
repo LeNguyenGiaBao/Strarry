@@ -78,7 +78,7 @@ public class ProductManage extends AppCompatActivity {
 //                        product_intent = new Intent(getApplicationContext(), MainActivity.class);
 //                        startActivity(product_intent);
                         finish();
-                        overridePendingTransition(0, 0);
+//                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation_notification:
                         return true;

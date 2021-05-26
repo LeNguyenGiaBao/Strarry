@@ -6,6 +6,12 @@ public class Cart {
     private int id_product;
     private int amount;
 
+    public Cart(int id_account, int id_product, int amount) {
+        this.id_account = id_account;
+        this.id_product = id_product;
+        this.amount = amount;
+    }
+
     public Cart(int id, int id_account, int id_product, int amount) {
         this.id = id;
         this.id_account = id_account;
