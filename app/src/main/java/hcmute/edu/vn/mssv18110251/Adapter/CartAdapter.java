@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,14 +26,16 @@ import hcmute.edu.vn.mssv18110251.Model.Product;
 import hcmute.edu.vn.mssv18110251.R;
 
 public class CartAdapter extends CursorRecyclerViewAdapter<CartAdapter.ViewHolder> {
-
-
+    Integer id_cart;
+    ArrayList<Integer> product_to_purchase = new ArrayList<Integer>();
     public CartAdapter(Context context, Cursor cursor) {
         super(context,cursor);
     }
 
     @Override
     public void onBindViewHolder(CartAdapter.ViewHolder viewHolder, Cursor cursor) {
+        id_cart = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_cart")));
+        Log.d("ID_Cart", String.valueOf(cursor.getPosition()));
         viewHolder.productName.setText(cursor.getString(cursor.getColumnIndex("name_product")));
         viewHolder.productPrice.setText(cursor.getString(cursor.getColumnIndex("price_product")));
         viewHolder.productQuantity.setText(cursor.getString(cursor.getColumnIndex("amount_product")));
@@ -40,6 +44,26 @@ public class CartAdapter extends CursorRecyclerViewAdapter<CartAdapter.ViewHolde
             Bitmap bitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
             viewHolder.imageView.setImageBitmap(bitmap);
         }
+
+        Integer total_price = Integer.parseInt(cursor.getString(cursor.getColumnIndex("amount_product"))) * Integer.parseInt(cursor.getString(cursor.getColumnIndex("price_product")));
+        viewHolder.totalPrice.setText(String.valueOf(total_price));
+
+        viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    if(!product_to_purchase.contains(cursor.getPosition())){
+                        product_to_purchase.add(cursor.getPosition());
+                        Log.d("CHECKED", String.valueOf(cursor.getPosition()));
+                    }
+                } else {
+                    if(product_to_purchase.contains(cursor.getPosition())){
+                        product_to_purchase.remove(cursor.getPosition());
+                        Log.d("UNCHECKED", String.valueOf(cursor.getPosition()));
+                    }
+                }
+            }
+        });
     }
 
     @NonNull
@@ -51,14 +75,19 @@ public class CartAdapter extends CursorRecyclerViewAdapter<CartAdapter.ViewHolde
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView productName, productPrice, productQuantity;
+        public TextView productName, productPrice, productQuantity, totalPrice;
         ImageView imageView;
+
+        CheckBox checkBox;
         public ViewHolder(View view) {
             super(view);
             productName = view.findViewById(R.id.productNameCart);
             productPrice = view.findViewById(R.id.productPriceCart);
-            productQuantity = view.findViewById(R.id.cart_quantity);
+            productQuantity = view.findViewById(R.id.quantity);
             imageView = view.findViewById(R.id.image_cartlist);
+
+            totalPrice = view.findViewById(R.id.total_price);
+            checkBox = view.findViewById(R.id.checkbox_id);
         }
     }
 }

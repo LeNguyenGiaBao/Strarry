@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,10 +26,11 @@ import hcmute.edu.vn.mssv18110251.Model.Product;
 
 public class CartActivity extends AppCompatActivity {
 
-    ProductDAO productDAO;
     CartDAO cartDAO;
     RecyclerView recyclerView;
     CartAdapter product_cart_adapter;
+
+    Button btn_purchase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,26 +62,19 @@ public class CartActivity extends AppCompatActivity {
         cartDAO = new CartDAO(this);
         cartDAO.open();
 
-        productDAO = new ProductDAO(this);
-        productDAO.open();
-
-//        List<Cart> carts = cartDAO.getCart(1);
-//        List<Product> products = new ArrayList<Product>();
-//        for(Cart c: carts){
-//            Product product = productDAO.get_product_by_id(c.getId_product());
-//            products.add(product);
-//            Log.d("ListProduct", product.getName());
-//        }
-
         Cursor cursor = cartDAO.getInfoCart(1);
-
         recyclerView=findViewById(R.id.recyclerViewCart);
-
         product_cart_adapter = new CartAdapter(getApplicationContext(), cursor);
-//        Log.d("Length list", String.valueOf(cursor.size()));
-
-
         recyclerView.setAdapter(product_cart_adapter);
+
+
+        btn_purchase = findViewById(R.id.btn_purchase);
+        btn_purchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 }

@@ -8,13 +8,13 @@
 
     <item
         android:id="@+id/navigation_event"
-        android:icon="@drawable/ic_baseline_event_available_24"
-        android:title="Event" />
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Cart" />
 
     <item
         android:id="@+id/navigation_notification"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="Notification" />
+        android:icon="@drawable/ic_baseline_assignment_24"
+        android:title="Bill" />
 
     <item
         android:id="@+id/navigation_profile"

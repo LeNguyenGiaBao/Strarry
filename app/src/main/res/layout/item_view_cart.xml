@@ -9,15 +9,22 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
+        <CheckBox
+            android:layout_marginLeft="10dp"
+            android:id="@+id/checkbox_id"
+            android:checked="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <ImageView
-            android:layout_marginLeft="5dp"
             android:id="@+id/image_cartlist"
             android:layout_width="0dp"
             android:layout_height="80dp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_baseline_add_photo_alternate_24"
-            android:scaleType="centerCrop"/>
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
 
         <LinearLayout  android:id="@+id/layout_item_desc"
@@ -59,13 +66,9 @@
                 android:layout_height="wrap_content"
                 android:text="Rs. 8,999"
                 android:textSize="@dimen/text_size_xmedium"
-                android:textColor="#4CAF50"
-                android:layout_marginTop="@dimen/margin_small"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delivery charge: FREE"
-                android:textSize="@dimen/text_size_small"/>
+                android:textColor="#4CAF50"/>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,14 +77,39 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Qty: "
-                    android:textSize="@dimen/text_size_small"/>
+                    android:text="Total price: "
+                    android:textSize="@dimen/text_size_medium"/>
                 <TextView
-                    android:id="@+id/cart_quantity"
+                    android:id="@+id/total_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Number"
-                    android:textSize="@dimen/text_size_small"/>
+                    android:textColor="@color/Red"
+                    android:textSize="@dimen/text_size_medium"/>
+
+                <ImageButton
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/addquantity"
+                    android:background="@drawable/plus"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/quantity"
+                    android:textSize="20sp"/>
+
+
+                <ImageButton
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/subquantity"
+                    android:background="@drawable/minus"/>
             </LinearLayout>
 
         </LinearLayout>

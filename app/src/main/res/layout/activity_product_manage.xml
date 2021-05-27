@@ -21,110 +21,97 @@
         android:layout_margin="@dimen/padding"
         android:id="@+id/imgView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
+        android:cropToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/txt_product"
-        app:layout_constraintBottom_toTopOf="@id/linear_name"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
         android:src="@drawable/ic_baseline_add_photo_alternate_24"/>
 
-    <LinearLayout
-        android:id="@+id/linear_name"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linear_description">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_remove"
+        app:layout_constraintTop_toBottomOf="@id/imgView"
+        tools:layout_editor_absoluteX="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Name:"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
-        <EditText
-            android:id="@+id/name_product"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product"
+                android:backgroundTint="@color/white">
+                <EditText
+                    android:id="@+id/name_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Product Name..."
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linear_price">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            android:text="Description:"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
-        <EditText
-            android:id="@+id/description_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+            <EditText
+                android:id="@+id/description_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:hint="Product Description..."
+                android:inputType="text"
+                android:maxLines="3"
+                android:padding="20dp"
+                style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/linear_quantity">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+            <EditText
+                android:id="@+id/price_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:hint="Product Price..."
+                android:inputType="number"
+                android:maxLines="3"
+                android:padding="20dp"
+                style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            android:text="Price:"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
-        <EditText
-            android:id="@+id/price_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:inputType="number"/>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+            <EditText
+                android:id="@+id/quantity_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:hint="Product Quantity..."
+                android:inputType="number"
+                android:maxLines="3"
+                android:padding="20dp"
+                style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_quantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/add_edit_remove"
-        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="5dp"
-            android:text="Quantity:"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
-        <EditText
-            android:id="@+id/quantity_product"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:inputType="number"/>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/add_edit_remove"
