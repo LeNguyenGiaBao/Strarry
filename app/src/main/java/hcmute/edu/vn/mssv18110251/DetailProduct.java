@@ -106,7 +106,7 @@ public class DetailProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Integer id_account  = 1;
-                Cart cart = new Cart(id_account, id_product, 0);
+                Cart cart = new Cart(id_account, id_product, quantity);
                 boolean success = cartDAO.add_to_cart(cart);
                 if(success) {
                     Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,29 @@ public class ProductDAO {
         }
         return products;
     }
+
+    public Product get_product_by_id(int id_product){
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " where " + DatabaseHelper.COLUMN_ID_PRODUCT + " = " + id_product;
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor != null && cursor.getCount() > 0)
+            cursor.moveToFirst();
+        else
+            return null;
+        Product product = new Product(cursor);
+        Log.d("ProductDAO", product.getName());
+        return product;
+//        if (cursor.moveToFirst()){
+//            do{
+//                Product product = new Product(cursor);
+//                Log.d("ProductDAO", product.getName());
+//                return product;
+//            }while (cursor.moveToNext());
+//        }
+//        return null;
+    }
+
+
 
     public int updateProduct(Product product){
         ContentValues values = new ContentValues();

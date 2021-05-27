@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar toolbar;
 
     Button product_manager;
-    Intent event_intent;
+    Intent event_intent, cart_intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 //                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation_notification:
+                        cart_intent = new Intent(getApplicationContext(), CartActivity.class);
+                        startActivity(cart_intent);
                         return true;
 //                    case R.id.history:
 //                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);

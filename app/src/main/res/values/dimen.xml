@@ -9,4 +9,16 @@
     <dimen name="headerTextSize">25sp</dimen>
     <dimen name="newsMoreTextSize">12sp</dimen>
     <dimen name="loginViewsMargin">20dp</dimen>
+
+    <dimen name="text_size_xsmall">8dp</dimen>
+    <dimen name="text_size_small">10dp</dimen>
+    <dimen name="text_size_medium">12dp</dimen>
+    <dimen name="text_size_xmedium">14dp</dimen>
+    <dimen name="text_size_large">16dp</dimen>
+    <dimen name="view_width_small">1dp</dimen>
+    <dimen name="view_width_xsmall">0.5dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
 </resources>

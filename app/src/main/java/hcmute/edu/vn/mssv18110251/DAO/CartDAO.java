@@ -2,11 +2,16 @@ package hcmute.edu.vn.mssv18110251.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
+import hcmute.edu.vn.mssv18110251.Model.Product;
 
 public class CartDAO {
     private SQLiteDatabase database;
@@ -39,5 +44,30 @@ public class CartDAO {
             return true;
         }
         return false;
+    }
+
+
+    public List<Cart> getCart(int id_account){
+        List<Cart> carts = new ArrayList<Cart>();
+//        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + ", " + DatabaseHelper.TABLE_CART
+//                + " where " + DatabaseHelper.COLUMN_ID_PRODUCT +" = " + DatabaseHelper.COLUMN_ID_PRODUCT_CART
+//                + " and " + DatabaseHelper.COLUMN_ID_ACCOUNT_CART +" = '0'";
+
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_CART + " where " + DatabaseHelper.COLUMN_ID_ACCOUNT_CART + " = " + id_account;
+
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Cart cart = new Cart(cursor);
+                carts.add(cart);
+            }while (cursor.moveToNext());
+        }
+        return carts;
+    }
+
+    public Cursor getInfoCart(int id_account){
+        String query = "SELECT cart.id_cart as id_cart, cart.id_product as id_product, product.name_product as name_product, product.price_product as price_product, product.image_product as image_product, cart.amount_product as amount_product from Cart, Product where cart.id_product = product.id_product and cart.id_account = " + id_account;
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
     }
 }
