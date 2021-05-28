@@ -49,9 +49,6 @@ public class CartDAO {
 
     public List<Cart> getCart(int id_account){
         List<Cart> carts = new ArrayList<Cart>();
-//        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + ", " + DatabaseHelper.TABLE_CART
-//                + " where " + DatabaseHelper.COLUMN_ID_PRODUCT +" = " + DatabaseHelper.COLUMN_ID_PRODUCT_CART
-//                + " and " + DatabaseHelper.COLUMN_ID_ACCOUNT_CART +" = '0'";
 
         String query = "SELECT * FROM " + DatabaseHelper.TABLE_CART + " where " + DatabaseHelper.COLUMN_ID_ACCOUNT_CART + " = " + id_account;
 

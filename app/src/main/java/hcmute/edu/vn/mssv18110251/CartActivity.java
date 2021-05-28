@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter;
+import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter2;
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
 import hcmute.edu.vn.mssv18110251.DAO.CartDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
@@ -28,7 +29,7 @@ public class CartActivity extends AppCompatActivity {
 
     CartDAO cartDAO;
     RecyclerView recyclerView;
-    CartAdapter product_cart_adapter;
+    CartAdapter2 product_cart_adapter;
 
     Button btn_purchase;
     @Override
@@ -62,9 +63,14 @@ public class CartActivity extends AppCompatActivity {
         cartDAO = new CartDAO(this);
         cartDAO.open();
 
-        Cursor cursor = cartDAO.getInfoCart(1);
+//        Cursor cursor = cartDAO.getInfoCart(1);
+
+//        product_cart_adapter = new CartAdapter(getApplicationContext(), cursor);
+        List<Cart> listCart = cartDAO.getCart(1);
+        product_cart_adapter = new CartAdapter2(getApplicationContext(), listCart);
+
+
         recyclerView=findViewById(R.id.recyclerViewCart);
-        product_cart_adapter = new CartAdapter(getApplicationContext(), cursor);
         recyclerView.setAdapter(product_cart_adapter);
 
 
@@ -72,7 +78,7 @@ public class CartActivity extends AppCompatActivity {
         btn_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
             }
         });
 

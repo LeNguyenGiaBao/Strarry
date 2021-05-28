@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import hcmute.edu.vn.mssv18110251.Model.Cart;
@@ -32,10 +33,12 @@ public class CartAdapter extends CursorRecyclerViewAdapter<CartAdapter.ViewHolde
         super(context,cursor);
     }
 
+
+
     @Override
     public void onBindViewHolder(CartAdapter.ViewHolder viewHolder, Cursor cursor) {
-        id_cart = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_cart")));
-        Log.d("ID_Cart", String.valueOf(cursor.getPosition()));
+        final Integer id_cart2 = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_cart")));
+        Log.d("ID_Cart", String.valueOf(id_cart));
         viewHolder.productName.setText(cursor.getString(cursor.getColumnIndex("name_product")));
         viewHolder.productPrice.setText(cursor.getString(cursor.getColumnIndex("price_product")));
         viewHolder.productQuantity.setText(cursor.getString(cursor.getColumnIndex("amount_product")));
@@ -52,9 +55,9 @@ public class CartAdapter extends CursorRecyclerViewAdapter<CartAdapter.ViewHolde
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    if(!product_to_purchase.contains(cursor.getPosition())){
+                    if(!product_to_purchase.contains(buttonView.getTag())){
                         product_to_purchase.add(cursor.getPosition());
-                        Log.d("CHECKED", String.valueOf(cursor.getPosition()));
+                        Log.d("CHECKED", String.valueOf(id_cart2));
                     }
                 } else {
                     if(product_to_purchase.contains(cursor.getPosition())){
