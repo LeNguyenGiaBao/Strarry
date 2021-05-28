@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -20,8 +21,12 @@ import java.util.List;
 import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter;
 import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter2;
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
+import hcmute.edu.vn.mssv18110251.DAO.BillDAO;
+import hcmute.edu.vn.mssv18110251.DAO.Bill_ProductDAO;
 import hcmute.edu.vn.mssv18110251.DAO.CartDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
+import hcmute.edu.vn.mssv18110251.Model.Bill;
+import hcmute.edu.vn.mssv18110251.Model.Bill_Product;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
 import hcmute.edu.vn.mssv18110251.Model.Product;
 
@@ -30,6 +35,9 @@ public class CartActivity extends AppCompatActivity {
     CartDAO cartDAO;
     RecyclerView recyclerView;
     CartAdapter2 product_cart_adapter;
+    BillDAO billDAO;
+    Bill_ProductDAO bill_productDAO;
+
 
     Button btn_purchase;
     @Override
@@ -73,12 +81,33 @@ public class CartActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.recyclerViewCart);
         recyclerView.setAdapter(product_cart_adapter);
 
+        billDAO = new BillDAO(this);
+        billDAO.open();
+
+        bill_productDAO = new Bill_ProductDAO(this);
+        bill_productDAO.open();
 
         btn_purchase = findViewById(R.id.btn_purchase);
         btn_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
+                Log.d("Length of list purchase", String.valueOf(list_purchase.size()));
+                if(list_purchase.size()>0){
+                    Bill bill = new Bill(1, 10000, 0, "12345", "Đồng Nai");
+                    if(billDAO.addBill(bill)){
+                        Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                    Integer bill_id = bill.getId();
+                    for(Cart cart: list_purchase){
+                        Integer id_product = cart.getId_product();
+                        Integer amount = cart.getAmount();
+                        Bill_Product bill_product = new Bill_Product(1, id_product, amount);
+                        bill_productDAO.addBill_Product(bill_product);
+                    }
+                    Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getBaseContext(), "Unable to pay", Toast.LENGTH_SHORT).show();
             }
         });
 

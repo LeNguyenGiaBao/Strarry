@@ -17,6 +17,14 @@ public class Bill {
         this.address = address;
     }
 
+    public Bill(int id_account, int price, float discount, String phone, String address) {
+        this.id_account = id_account;
+        this.price = price;
+        this.discount = discount;
+        this.phone = phone;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }
