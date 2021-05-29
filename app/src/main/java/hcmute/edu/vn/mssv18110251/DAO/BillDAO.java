@@ -2,6 +2,7 @@ package hcmute.edu.vn.mssv18110251.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -43,6 +44,15 @@ public class BillDAO {
             return true;
         }
         return false;
+    }
+
+    public int get_last_inserted_id(){
+        String query = "SELECT last_insert_rowid() from " + DatabaseHelper.TABLE_BILL;
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+        int id = cursor.getInt(0);
+        cursor.close();
+        return id;
     }
 }
 

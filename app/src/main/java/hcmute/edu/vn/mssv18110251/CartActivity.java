@@ -94,7 +94,7 @@ public class CartActivity extends AppCompatActivity {
                 List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
                 Log.d("Length of list purchase", String.valueOf(list_purchase.size()));
                 if(list_purchase.size()>0){
-                    Bill bill = new Bill(1, 10000, 0, "12345", "Đồng Nai");
+                    Bill bill = new Bill(1, 10000, (float) 0.0, "12345", "Đồng Nai");
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }
@@ -102,9 +102,15 @@ public class CartActivity extends AppCompatActivity {
                     for(Cart cart: list_purchase){
                         Integer id_product = cart.getId_product();
                         Integer amount = cart.getAmount();
-                        Bill_Product bill_product = new Bill_Product(1, id_product, amount);
+                        Integer id_bill = billDAO.get_last_inserted_id();
+                        Log.d("ID_BILL INSERTED", String.valueOf(id_bill));
+                        Bill_Product bill_product = new Bill_Product(id_bill, id_product, amount);
                         bill_productDAO.addBill_Product(bill_product);
+
+                        cartDAO.remove(cart);
                     }
+                    finish();
+                    startActivity(getIntent());
                     Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(getBaseContext(), "Unable to pay", Toast.LENGTH_SHORT).show();

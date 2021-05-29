@@ -67,4 +67,9 @@ public class CartDAO {
         Cursor cursor = database.rawQuery(query, null);
         return cursor;
     }
+
+    public void remove(Cart cart){
+        this.open();
+        database.delete(DatabaseHelper.TABLE_CART, DatabaseHelper.COLUMN_ID_CART +"=?", new String[]{String.valueOf(cart.getId())});
+    }
 }
