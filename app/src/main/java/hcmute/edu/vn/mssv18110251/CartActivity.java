@@ -2,6 +2,7 @@ package hcmute.edu.vn.mssv18110251;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -78,8 +79,10 @@ public class CartActivity extends AppCompatActivity {
         product_cart_adapter = new CartAdapter2(getApplicationContext(), listCart);
 
 
+
         recyclerView=findViewById(R.id.recyclerViewCart);
         recyclerView.setAdapter(product_cart_adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
         billDAO = new BillDAO(this);
         billDAO.open();
@@ -98,19 +101,21 @@ public class CartActivity extends AppCompatActivity {
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }
-                    Integer bill_id = bill.getId();
                     for(Cart cart: list_purchase){
                         Integer id_product = cart.getId_product();
                         Integer amount = cart.getAmount();
-                        Integer id_bill = billDAO.get_last_inserted_id();
+                        Integer id_bill = billDAO.get_last_inserted_id(1);
                         Log.d("ID_BILL INSERTED", String.valueOf(id_bill));
                         Bill_Product bill_product = new Bill_Product(id_bill, id_product, amount);
                         bill_productDAO.addBill_Product(bill_product);
 
                         cartDAO.remove(cart);
                     }
-                    finish();
-                    startActivity(getIntent());
+//                    finish();
+//                    startActivity(getIntent());
+
+                    Intent bill_intent = new Intent(getApplicationContext(), BillInfoActivity.class);
+                    startActivity(bill_intent);
                     Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(getBaseContext(), "Unable to pay", Toast.LENGTH_SHORT).show();
@@ -118,4 +123,6 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

@@ -52,7 +52,7 @@
 
                 <ImageView
                     android:padding="5dp"
-                    android:id="@+id/deletecard"
+                    android:id="@+id/deletecart"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"

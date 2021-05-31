@@ -1,5 +1,7 @@
 package hcmute.edu.vn.mssv18110251.Model;
 
+import android.database.Cursor;
+
 public class Bill_Product {
     private int id_bill;
     private int id_product;
@@ -34,5 +36,11 @@ public class Bill_Product {
 
     public void setAmount_product(int amount_product) {
         this.amount_product = amount_product;
+    }
+
+    public Bill_Product(Cursor cursor) {
+        this.id_bill = cursor.getInt(cursor.getColumnIndex("id_bill"));
+        this.id_product = cursor.getInt(cursor.getColumnIndex("id_product"));
+        this.amount_product = cursor.getInt(cursor.getColumnIndex("amount_product"));
     }
 }

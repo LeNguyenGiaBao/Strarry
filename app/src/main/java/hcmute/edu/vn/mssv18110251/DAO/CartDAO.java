@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +72,19 @@ public class CartDAO {
     public void remove(Cart cart){
         this.open();
         database.delete(DatabaseHelper.TABLE_CART, DatabaseHelper.COLUMN_ID_CART +"=?", new String[]{String.valueOf(cart.getId())});
+    }
+
+    public boolean update(Cart cart){
+        this.open();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_ID_ACCOUNT_CART, cart.getId_account());
+        values.put(DatabaseHelper.COLUMN_ID_PRODUCT_CART, cart.getId_product());
+        values.put(DatabaseHelper.COLUMN_AMOUNT_PRODUCT_CART, cart.getAmount());
+        long success =  database.update(DatabaseHelper.TABLE_CART, values, DatabaseHelper.COLUMN_ID_CART + "=?", new String[]{String.valueOf(cart.getId())});
+        Log.d("CartDAO", String.valueOf(success));
+        if(success!=-1){
+            return true;
+        }
+        return false;
     }
 }

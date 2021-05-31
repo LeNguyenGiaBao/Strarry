@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import hcmute.edu.vn.mssv18110251.DAO.CartDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
 import hcmute.edu.vn.mssv18110251.Model.Product;
@@ -30,7 +32,9 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
     Context context;
     List<Cart> listCart;
     ProductDAO productDAO;
+    CartDAO cartDAO;
     List<Integer> product_to_purchase = new ArrayList<Integer>();
+    int quantity;
 
     public CartAdapter2(Context context, List<Cart> listCart) {
         this.context = context;
@@ -50,6 +54,9 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
     public CartAdapter2.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         productDAO = new ProductDAO(context);
         productDAO.open();
+
+        cartDAO = new CartDAO(context);
+        cartDAO.open();
         // gán view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view_cart, parent, false);
         return new CartAdapter2.ViewHolder(view);
@@ -72,8 +79,9 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
             holder.imageView.setImageBitmap(bitmap);
         }
 
-        Integer total_price = product.getPrice() + cart.getAmount();
-        holder.totalPrice.setText(String.valueOf(total_price));
+        quantity = cart.getAmount();
+        Integer total_price = product.getPrice() * cart.getAmount();
+        holder.totalPrice.setText(currencyFormatter.format(total_price));
 
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -92,7 +100,73 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
             }
         });
 
+        holder.add_amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CartAdapter2_Position", String.valueOf(position));
+                Cart cart = listCart.get(position);
+                Product product = productDAO.get_product_by_id(cart.getId_product());
+                quantity = cart.getAmount();
+
+                quantity++;
+                holder.productQuantity.setText(String.valueOf(quantity));
+                Integer total_price = product.getPrice() * quantity;
+                holder.totalPrice.setText(currencyFormatter.format(total_price));
+                cart.setAmount(quantity);
+                boolean success = cartDAO.update(cart);
+                if(!success){
+                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        holder.minus_amount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CartAdapter2_Position", String.valueOf(position));
+                Cart cart = listCart.get(position);
+                Product product = productDAO.get_product_by_id(cart.getId_product());
+                quantity = cart.getAmount();
+
+                if(quantity == 1){
+                    Toast.makeText(context, "Can't decrease quantity < 1", Toast.LENGTH_SHORT).show();
+                } else {
+                    quantity--;
+                    holder.productQuantity.setText(String.valueOf(quantity));
+                    Integer total_price = product.getPrice() * quantity;
+                    holder.totalPrice.setText(currencyFormatter.format(total_price));
+                    cart.setAmount(quantity);
+
+                    boolean success = cartDAO.update(cart);
+                    if(!success){
+                        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+        });
+
+        holder.remove_from_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CartAdapter2_Position", String.valueOf(position));
+                Cart cart = listCart.get(position);
+                cartDAO.remove(cart);
+                removeItem(position);
+
+
+            }
+        });
+
+
     }
+
+    private void removeItem(int position) {
+        listCart.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, listCart.size());
+    }
+
 
     @Override
     public int getItemCount() {
@@ -101,7 +175,7 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, productPrice, productQuantity, totalPrice;
-        ImageView imageView;
+        ImageView imageView, add_amount, minus_amount, remove_from_cart;
 
         CheckBox checkBox;
         public ViewHolder(View view) {
@@ -113,6 +187,11 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
 
             totalPrice = view.findViewById(R.id.total_price);
             checkBox = view.findViewById(R.id.checkbox_id);
+
+            add_amount = view.findViewById(R.id.addquantity);
+            minus_amount = view.findViewById(R.id.subquantity);
+
+            remove_from_cart = view.findViewById(R.id.deletecart);
         }
     }
 }

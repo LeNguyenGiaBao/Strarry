@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
+import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Bill;
 
 public class BillDAO {
@@ -46,13 +48,27 @@ public class BillDAO {
         return false;
     }
 
-    public int get_last_inserted_id(){
-        String query = "SELECT last_insert_rowid() from " + DatabaseHelper.TABLE_BILL;
+    public int get_last_inserted_id(int id_account){
+        String query = "SELECT last_insert_rowid() from " + DatabaseHelper.TABLE_BILL + " where " + DatabaseHelper.COLUMN_ID_ACCOUNT_BILL + " = " + id_account;
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
         int id = cursor.getInt(0);
         cursor.close();
         return id;
+    }
+
+    public Bill getBills(int id_bill){
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_BILL + " where " + DatabaseHelper.COLUMN_ID_BILL + " = " + id_bill;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Log.d("CHECK", "account.getEmail()");
+                Bill bill = new Bill(cursor);
+
+                return bill;
+            }while (cursor.moveToNext());
+        }
+        return null;
     }
 }
 

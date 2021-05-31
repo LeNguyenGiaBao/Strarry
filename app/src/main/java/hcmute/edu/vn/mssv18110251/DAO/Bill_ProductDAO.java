@@ -2,11 +2,15 @@ package hcmute.edu.vn.mssv18110251.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
-import hcmute.edu.vn.mssv18110251.Model.Bill;
 import hcmute.edu.vn.mssv18110251.Model.Bill_Product;
 
 public class Bill_ProductDAO {
@@ -39,5 +43,19 @@ public class Bill_ProductDAO {
             return true;
         }
         return false;
+    }
+
+    public List<Bill_Product> getBillProduct(int id_bill){
+        List<Bill_Product> list_bill_product = new ArrayList<Bill_Product>();
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_BILL_PRODUCT + " where " + DatabaseHelper.COLUMN_ID_BILL + " = " + id_bill;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Log.d("CHECK", "account.getEmail()");
+                Bill_Product bill_product = new Bill_Product(cursor);
+                list_bill_product.add(bill_product);
+            }while (cursor.moveToNext());
+        }
+        return list_bill_product;
     }
 }

@@ -36,7 +36,7 @@ public class DetailProduct extends AppCompatActivity {
     ImageView imageView;
     ImageButton plus_quantity, minus_quantity;
     Button add_to_cart;
-    int quantity = 0, price;
+    int quantity = 1, price;
 
 
     @Override
@@ -92,8 +92,8 @@ public class DetailProduct extends AppCompatActivity {
         minus_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(quantity == 0){
-                    Toast.makeText(getBaseContext(), "Can't decrease quantity < 0", Toast.LENGTH_SHORT).show();
+                if(quantity == 1){
+                    Toast.makeText(getBaseContext(), "Can't decrease quantity < 1", Toast.LENGTH_SHORT).show();
                 } else {
                     quantity--;
                     displayQuantity();
