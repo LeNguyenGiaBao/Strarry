@@ -4,12 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
 import hcmute.edu.vn.mssv18110251.MainActivity;
 import hcmute.edu.vn.mssv18110251.Model.Account;
@@ -21,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
 
     Button btn_login;
     private AccountDAO accountDAO;
+    private SharePreferenceClass SharedPreferenceClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,16 +45,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+        if(account1!=null){
+            Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(homePage);
+        }
+
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email_string = email.getText().toString();
                 String password_string = password.getText().toString();
-//                Toast.makeText(getApplicationContext(), "email_string", Toast.LENGTH_SHORT).show();
                 Account account = accountDAO.checkAccount(email_string, password_string);
                 if(account != null){
+                    SharedPreferenceClass.getInstance(getBaseContext()).set("account", account);
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
+
+                    Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+                    Log.d("LOGIN", String.valueOf(account1.getId()));
                     Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(homePage);
                 }

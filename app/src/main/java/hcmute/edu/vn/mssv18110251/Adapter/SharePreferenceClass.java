@@ -41,4 +41,11 @@ public class SharePreferenceClass {
         String json = sharedPreferences.getString(name, "");
         return new Gson().fromJson(json, Account.class);
     }
+
+    public void clear(String name){
+        sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(name);
+        editor.commit();
+    }
 }

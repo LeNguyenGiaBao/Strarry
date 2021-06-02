@@ -22,10 +22,12 @@ import java.util.List;
 import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter;
 import hcmute.edu.vn.mssv18110251.Adapter.CartAdapter2;
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
+import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
 import hcmute.edu.vn.mssv18110251.DAO.BillDAO;
 import hcmute.edu.vn.mssv18110251.DAO.Bill_ProductDAO;
 import hcmute.edu.vn.mssv18110251.DAO.CartDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
+import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Bill;
 import hcmute.edu.vn.mssv18110251.Model.Bill_Product;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
@@ -41,10 +43,15 @@ public class CartActivity extends AppCompatActivity {
 
 
     Button btn_purchase;
+    private SharePreferenceClass SharedPreferenceClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_notification);
@@ -75,7 +82,7 @@ public class CartActivity extends AppCompatActivity {
 //        Cursor cursor = cartDAO.getInfoCart(1);
 
 //        product_cart_adapter = new CartAdapter(getApplicationContext(), cursor);
-        List<Cart> listCart = cartDAO.getCart(1);
+        List<Cart> listCart = cartDAO.getCart(account.getId());
         product_cart_adapter = new CartAdapter2(getApplicationContext(), listCart);
 
 
@@ -97,14 +104,14 @@ public class CartActivity extends AppCompatActivity {
                 List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
                 Log.d("Length of list purchase", String.valueOf(list_purchase.size()));
                 if(list_purchase.size()>0){
-                    Bill bill = new Bill(1, 10000, (float) 0.0, "12345", "Đồng Nai");
+                    Bill bill = new Bill(account.getId(), 10000, (float) 0.0, "12345", "Đồng Nai");
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }
+                    Integer id_bill = billDAO.get_last_inserted_id(1);
                     for(Cart cart: list_purchase){
                         Integer id_product = cart.getId_product();
                         Integer amount = cart.getAmount();
-                        Integer id_bill = billDAO.get_last_inserted_id(1);
                         Log.d("ID_BILL INSERTED", String.valueOf(id_bill));
                         Bill_Product bill_product = new Bill_Product(id_bill, id_product, amount);
                         bill_productDAO.addBill_Product(bill_product);
@@ -115,6 +122,7 @@ public class CartActivity extends AppCompatActivity {
 //                    startActivity(getIntent());
 
                     Intent bill_intent = new Intent(getApplicationContext(), BillInfoActivity.class);
+                    bill_intent.putExtra("ID_BILL", id_bill);
                     startActivity(bill_intent);
                     Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else

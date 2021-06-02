@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 
@@ -20,7 +21,10 @@ import java.util.List;
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
 import hcmute.edu.vn.mssv18110251.DAO.CategoryDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
+import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Product;
+import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar toolbar;
 
     Button product_manager;
-    Intent event_intent, cart_intent;
+    Intent event_intent, cart_intent, profile_intent;
+    private SharePreferenceClass SharedPreferenceClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        toolbar = getSupportActionBar();
+
+        Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_product);
@@ -59,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
                         cart_intent = new Intent(getApplicationContext(), CartActivity.class);
                         startActivity(cart_intent);
                         return true;
-//                    case R.id.history:
-//                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);
-//                        startActivity(intentNext);
-//                        overridePendingTransition(0, 0);
-//                        return true;
+                    case R.id.navigation_profile:
+                        profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(profile_intent);
+                        overridePendingTransition(0, 0);
+                        return true;
                 }
                 return false;
             }

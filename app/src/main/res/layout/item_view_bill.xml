@@ -24,14 +24,13 @@
         android:text="x"
         android:textStyle="bold"
         android:id="@+id/quantityinOrderSummary"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/hasTopping"
+        android:id="@+id/productPrice"
         android:textStyle="italic"
-
         android:layout_marginLeft="20dp"
         android:layout_below="@id/product_name"
         android:text="Price"/>

@@ -19,9 +19,11 @@ import java.util.List;
 import java.util.Locale;
 
 import hcmute.edu.vn.mssv18110251.Adapter.ProductAdapter;
+import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
 import hcmute.edu.vn.mssv18110251.DAO.CartDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
 import hcmute.edu.vn.mssv18110251.Login.RegisterActivity;
+import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
 import hcmute.edu.vn.mssv18110251.Model.Product;
 
@@ -37,12 +39,16 @@ public class DetailProduct extends AppCompatActivity {
     ImageButton plus_quantity, minus_quantity;
     Button add_to_cart;
     int quantity = 1, price;
+    private SharePreferenceClass SharedPreferenceClass;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
+
+        Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+
 
         CartDAO cartDAO = new CartDAO(this);
         cartDAO.open();
@@ -105,7 +111,7 @@ public class DetailProduct extends AppCompatActivity {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer id_account  = 1;
+                Integer id_account  = account.getId();
                 Cart cart = new Cart(id_account, id_product, quantity);
                 boolean success = cartDAO.add_to_cart(cart);
                 if(success) {
