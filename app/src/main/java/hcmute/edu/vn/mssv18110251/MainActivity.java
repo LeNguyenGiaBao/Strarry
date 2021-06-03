@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_product:
                         return true;
                     case R.id.navigation_event:
-                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
+//                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
+                        event_intent = new Intent(getApplicationContext(), BillActivity.class);
                         startActivity(event_intent);
 //                        overridePendingTransition(0, 0);
                         return true;

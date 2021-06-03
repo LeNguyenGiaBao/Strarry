@@ -134,11 +134,7 @@ public class CartActivity extends AppCompatActivity {
                     txt_total_price.setText(currencyFormatter.format(total_price));
                 } else {
                     txt_total_price.setText(currencyFormatter.format(0));
-
                 }
-
-
-
             }
         });
 
@@ -146,10 +142,12 @@ public class CartActivity extends AppCompatActivity {
         btn_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int total_price = 0;
+                int total_quantity = 0;
                 List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
                 Log.d("Length of list purchase", String.valueOf(list_purchase.size()));
                 if(list_purchase.size()>0){
-                    Bill bill = new Bill(account.getId(), 10000, (float) 0.0, String.valueOf(date), String.valueOf(month));
+                    Bill bill = new Bill(account.getId(), 10000, (float) 0.0, String.valueOf(month), String.valueOf(date));
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }
@@ -160,14 +158,24 @@ public class CartActivity extends AppCompatActivity {
                         Log.d("ID_BILL INSERTED", String.valueOf(id_bill));
                         Bill_Product bill_product = new Bill_Product(id_bill, id_product, amount);
                         bill_productDAO.addBill_Product(bill_product);
+                        Product product = productDAO.get_product_by_id(id_product);
+                        total_price += product.getPrice() * amount;
+                        total_quantity+= amount;
 
                         cartDAO.remove(cart);
+                    }
+                    bill.setPrice(total_price);
+                    Log.d("CART ACTIVITY", String.valueOf(bill.getPrice()));
+                    if(billDAO.update(bill)){
+                        Log.d("CART ACTIVITY---------------------------------------------------------------------------------------", String.valueOf(bill.getPrice()));
                     }
 //                    finish();
 //                    startActivity(getIntent());
 
                     Intent bill_intent = new Intent(getApplicationContext(), BillInfoActivity.class);
                     bill_intent.putExtra("ID_BILL", id_bill);
+                    bill_intent.putExtra("TOTAL_PRICE", total_price);
+                    bill_intent.putExtra("TOTAL_QUANTITY", total_quantity);
                     startActivity(bill_intent);
                     Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_SHORT).show();
                 } else

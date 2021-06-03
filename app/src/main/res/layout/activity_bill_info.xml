@@ -26,16 +26,27 @@
                 android:textSize="30sp"
                 android:id="@+id/orderSummary"
                 android:text="BILL SUMMARY"/>
-
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day: "
+                android:layout_below="@id/orderSummary"
+                android:layout_alignParentRight="true"
+                android:textSize="20sp"
+                android:layout_marginRight="15dp"/>
 
 
             <ListView
                 android:layout_width="match_parent"
                 android:paddingTop="40dp"
                 android:layout_height="match_parent"
-                android:id="@+id/listview"/>
+                android:id="@+id/listview"
+                android:layout_below="@+id/date"
+                android:layout_above="@+id/infobill"/>
 
             <RelativeLayout
+                android:id="@+id/infobill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/finish">
@@ -60,7 +71,7 @@
                     android:id="@+id/total_quantity"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="20dp"
-                    android:text="Q"/>
+                    android:text="SL"/>
 
             </RelativeLayout>
 

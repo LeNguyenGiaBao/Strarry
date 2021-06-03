@@ -7,9 +7,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
 import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Bill;
+import hcmute.edu.vn.mssv18110251.Model.Product;
 
 public class BillDAO {
     private SQLiteDatabase database;
@@ -69,6 +73,34 @@ public class BillDAO {
             }while (cursor.moveToNext());
         }
         return null;
+    }
+
+    public List<Bill> get_list_bill_by_id(int id_account){
+        List<Bill> billList = new ArrayList<Bill>();
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_BILL + " WHERE " + DatabaseHelper.COLUMN_ID_ACCOUNT_BILL + " = " + id_account;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Bill bill = new Bill(cursor);
+                billList.add(bill);
+            }while (cursor.moveToNext());
+        }
+        return billList;
+    }
+
+    public boolean update(Bill bill){
+        this.open();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_ID_ACCOUNT_BILL, bill.getId_account());
+        values.put(DatabaseHelper.COLUMN_PRICE_BILL, bill.getPrice());
+        values.put(DatabaseHelper.COLUMN_DISCOUNT_BILL, bill.getDiscount());
+        values.put(DatabaseHelper.COLUMN_PHONE_BILL, bill.getPhone());
+        values.put(DatabaseHelper.COLUMN_ADDRESS_BILL, bill.getAddress());
+        long success = database.update(DatabaseHelper.TABLE_BILL, values, DatabaseHelper.COLUMN_ID_BILL + "=?", new String[]{String.valueOf(bill.getId())});
+        if(success!=-1){
+            return true;
+        }
+        return false;
     }
 }
 
