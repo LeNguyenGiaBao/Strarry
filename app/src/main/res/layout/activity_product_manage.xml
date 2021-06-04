@@ -75,6 +75,15 @@
                 style="@style/modifiedEditText"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/spnCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/parent"

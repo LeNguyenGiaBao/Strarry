@@ -19,8 +19,8 @@ public class Category {
     }
 
     public Category(Cursor cursor){
-        this.id = cursor.getInt(cursor.getColumnIndex("id"));
-        this.name = cursor.getString(cursor.getColumnIndex("name"));
+        this.id = cursor.getInt(cursor.getColumnIndex("id_category"));
+        this.name = cursor.getString(cursor.getColumnIndex("name_category"));
     }
 
     public int getId() {

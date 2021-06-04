@@ -24,14 +24,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
+import hcmute.edu.vn.mssv18110251.Adapter.CategorySpinnerAdapter;
+import hcmute.edu.vn.mssv18110251.DAO.CategoryDAO;
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
+import hcmute.edu.vn.mssv18110251.Model.Category;
 import hcmute.edu.vn.mssv18110251.Model.Product;
 
 public class ProductManage extends AppCompatActivity {
@@ -43,6 +49,9 @@ public class ProductManage extends AppCompatActivity {
     ProductDAO productDAO;
     Bitmap image_product;
     ImageView imageView;
+    Spinner categorySpinner;
+    private List<Category> categories;
+    CategoryDAO categoryDAO;
 
     Intent product_intent;
     @Override
@@ -58,6 +67,12 @@ public class ProductManage extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        categoryDAO = new CategoryDAO(this);
+        categoryDAO.open();
+        categories = categoryDAO.getCategory();
+        categorySpinner = (Spinner)findViewById(R.id.spnCategory);
+        set_value_spinner();
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +146,7 @@ public class ProductManage extends AppCompatActivity {
             public void onClick(View v) {
                 String nameProduct = name_product.getText().toString();
                 String descriptionProduct = description_product.getText().toString();
+                Integer categoryId = categories.get(categorySpinner.getSelectedItemPosition()).getId();
                 Integer priceProduct = Integer.parseInt(price.getText().toString());
                 Integer quantityProduct = Integer.parseInt(quantity.getText().toString());
                 byte[] byteArray = new byte[0];
@@ -142,7 +158,7 @@ public class ProductManage extends AppCompatActivity {
                     byteArray = stream.toByteArray();
                     image_product.recycle();
                 }
-                Product product = new Product(nameProduct, descriptionProduct, priceProduct, quantityProduct, byteArray, 1);
+                Product product = new Product(nameProduct, descriptionProduct, priceProduct, quantityProduct, byteArray, categoryId);
                 if(productDAO.addProduct(product)){
                     Toast.makeText(ProductManage.this, "Product has been added successfully!", Toast.LENGTH_LONG).show();
                 } else {
@@ -153,8 +169,17 @@ public class ProductManage extends AppCompatActivity {
                 price.setText("");
                 quantity.setText("");
                 imageView.setImageResource(R.drawable.ic_baseline_add_photo_alternate_24);
+                categorySpinner.setSelection(0);
+
             }
         });
+    }
+
+    private void set_value_spinner() {
+        SpinnerAdapter categoryAdapter = new CategorySpinnerAdapter(getApplicationContext(), categories);
+        categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setSelection(0);
+
     }
 
     private void pickImageFromGallery() {

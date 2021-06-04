@@ -35,6 +35,16 @@ public class CartDAO {
         dbHelper.close();
     }
 
+    public Cart get_cart_by_id(int id){
+        this.open();
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CART, allColumns, DatabaseHelper.COLUMN_ID_CART + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0)
+            cursor.moveToFirst();
+        else
+            return null;
+        return new Cart(cursor);
+    }
+
     public boolean add_to_cart(Cart cart){
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_ID_ACCOUNT_CART, cart.getId_account());
@@ -86,5 +96,15 @@ public class CartDAO {
             return true;
         }
         return false;
+    }
+
+    public int get_id_cart(int id_account, int id_product){
+        this.open();
+        Cursor cursor = database.query(DatabaseHelper.TABLE_CART, new String[]{DatabaseHelper.COLUMN_ID_CART}, DatabaseHelper.COLUMN_ID_ACCOUNT_CART + "=? and " + DatabaseHelper.COLUMN_ID_PRODUCT_CART + "=?", new String []{String.valueOf(id_account), String.valueOf(id_product)}, null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0)
+            cursor.moveToFirst();
+        else
+            return -1;
+        return cursor.getInt(cursor.getColumnIndex("id_cart"));
     }
 }

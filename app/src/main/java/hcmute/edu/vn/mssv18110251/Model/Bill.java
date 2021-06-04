@@ -28,8 +28,9 @@ public class Bill {
     }
 
     public Bill(Cursor cursor) {
-        this.id_account = cursor.getInt(cursor.getColumnIndex("id_account"));;
-        this.price = cursor.getInt(cursor.getColumnIndex("price"));;
+        this.id_account = cursor.getInt(cursor.getColumnIndex("id_account"));
+        this.id = cursor.getInt(cursor.getColumnIndex("id_bill"));
+        this.price = cursor.getInt(cursor.getColumnIndex("price"));
         this.discount = cursor.getInt(cursor.getColumnIndex("discount"));
         this.phone = cursor.getString(cursor.getColumnIndex("phone"));
         this.address = cursor.getString(cursor.getColumnIndex("address"));

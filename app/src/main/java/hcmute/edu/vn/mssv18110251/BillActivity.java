@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.List;
 
@@ -28,11 +29,13 @@ public class BillActivity extends AppCompatActivity {
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
 
+        Log.d("BILL_ACTIVITY_______________________________________________________________________________", String.valueOf(account.getId()));
 
         billDAO = new BillDAO(this);
         billDAO.open();
 
         List<Bill> list_bill = billDAO.get_list_bill_by_id(account.getId());
+
 
         billActivityAdapter = new BillActivityAdapter(getApplicationContext(), list_bill);
 

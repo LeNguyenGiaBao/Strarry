@@ -88,17 +88,25 @@ public class BillDAO {
         return billList;
     }
 
-    public boolean update(Bill bill){
+    public boolean update(int id_bill, int total_price){
         this.open();
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_ID_ACCOUNT_BILL, bill.getId_account());
-        values.put(DatabaseHelper.COLUMN_PRICE_BILL, bill.getPrice());
-        values.put(DatabaseHelper.COLUMN_DISCOUNT_BILL, bill.getDiscount());
-        values.put(DatabaseHelper.COLUMN_PHONE_BILL, bill.getPhone());
-        values.put(DatabaseHelper.COLUMN_ADDRESS_BILL, bill.getAddress());
-        long success = database.update(DatabaseHelper.TABLE_BILL, values, DatabaseHelper.COLUMN_ID_BILL + "=?", new String[]{String.valueOf(bill.getId())});
-        if(success!=-1){
-            return true;
+//        ContentValues values = new ContentValues();
+//        values.put(DatabaseHelper.COLUMN_ID_ACCOUNT_BILL, bill.getId_account());
+//        values.put(DatabaseHelper.COLUMN_PRICE_BILL, bill.getPrice());
+//        values.put(DatabaseHelper.COLUMN_DISCOUNT_BILL, bill.getDiscount());
+//        values.put(DatabaseHelper.COLUMN_PHONE_BILL, bill.getPhone());
+//        values.put(DatabaseHelper.COLUMN_ADDRESS_BILL, bill.getAddress());
+//        long success = database.update(DatabaseHelper.TABLE_BILL, values, DatabaseHelper.COLUMN_ID_BILL + "=?", new String[]{String.valueOf(id_bill)});
+//        if(success!=-1){
+//            return true;
+//        }
+//        return false;
+        String query = "UPDATE " + DatabaseHelper.TABLE_BILL + " SET " + DatabaseHelper.COLUMN_PRICE_BILL + " = " + total_price + " WHERE " + DatabaseHelper.COLUMN_ID_BILL + " = " + id_bill;
+        Cursor cursor = database.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                return true;
+            } while (cursor.moveToNext());
         }
         return false;
     }

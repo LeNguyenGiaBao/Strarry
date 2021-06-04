@@ -56,15 +56,16 @@ public class CartActivity extends AppCompatActivity {
     Button btn_purchase;
     private SharePreferenceClass SharedPreferenceClass;
 
+
+    Locale locale = new Locale("vn", "VN");
+    NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
         Log.d("DATE", String.valueOf(date));
-
-        Locale locale = new Locale("vn", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
         txt_total_price = findViewById(R.id.total_price);
@@ -164,10 +165,10 @@ public class CartActivity extends AppCompatActivity {
 
                         cartDAO.remove(cart);
                     }
-                    bill.setPrice(total_price);
                     Log.d("CART ACTIVITY", String.valueOf(bill.getPrice()));
-                    if(billDAO.update(bill)){
+                    if(billDAO.update(id_bill, total_price)){
                         Log.d("CART ACTIVITY---------------------------------------------------------------------------------------", String.valueOf(bill.getPrice()));
+                        Log.d("CART ACTIVITY-----------aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa----------------------------------------", String.valueOf(bill.getId()));
                     }
 //                    finish();
 //                    startActivity(getIntent());
@@ -183,6 +184,21 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_product);
+        Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+
+        List<Cart> listCart = cartDAO.getCart(account.getId());
+        product_cart_adapter = new CartAdapter2(getApplicationContext(), listCart);
+
+        recyclerView.setAdapter(product_cart_adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
+
+        txt_total_price.setText(currencyFormatter.format(0));
     }
 
 

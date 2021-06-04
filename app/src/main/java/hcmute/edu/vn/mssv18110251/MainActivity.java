@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(cart_intent);
                         return true;
                     case R.id.navigation_profile:
-                        profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
+                        profile_intent = new Intent(getApplicationContext(), ProductManage.class);
                         startActivity(profile_intent);
                         overridePendingTransition(0, 0);
                         return true;

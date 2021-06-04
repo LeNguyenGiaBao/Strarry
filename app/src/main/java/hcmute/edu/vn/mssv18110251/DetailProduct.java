@@ -112,12 +112,25 @@ public class DetailProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Integer id_account  = account.getId();
-                Cart cart = new Cart(id_account, id_product, quantity);
-                boolean success = cartDAO.add_to_cart(cart);
-                if(success) {
-                    Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
+                Integer id_cart = cartDAO.get_id_cart(id_account, id_product);
+                if(id_cart==-1) {
+                    Cart cart = new Cart(id_account, id_product, quantity);
+                    boolean success = cartDAO.add_to_cart(cart);
+                    if (success) {
+                        Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
+                    Cart cart = cartDAO.get_cart_by_id(id_cart);
+                    int init_amount = cart.getAmount();
+                    cart.setAmount(init_amount + quantity);
+                    boolean success = cartDAO.update(cart);
+                    if (success) {
+                        Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
