@@ -72,23 +72,29 @@ public class CartActivity extends AppCompatActivity {
         txt_total_price.setText(currencyFormatter.format(0));
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.navigation_notification);
+        navigation.setSelectedItemId(R.id.navigation_2);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.navigation_product:
-                        return true;
-                    case R.id.navigation_event:
+                    case R.id.navigation_2:
+//                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
+//                        Intent cart_intent = new Intent(getApplicationContext(), CartActivity.class);
+//                        startActivity(cart_intent);
 //                        overridePendingTransition(0, 0);
                         return true;
-                    case R.id.navigation_notification:
+                    case R.id.navigation_1:
+                        finish();
                         return true;
-//                    case R.id.history:
-//                        intentNext = new Intent(getApplicationContext(), HistoryActivity.class);
-//                        startActivity(intentNext);
+                    case R.id.navigation_3:
+                        Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                        startActivityForResult(bill_intent, 2222);
+                        return true;
+                    case R.id.navigation_4:
+                        Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(profile_intent);
 //                        overridePendingTransition(0, 0);
-//                        return true;
+                        return true;
                 }
                 return false;
             }
@@ -189,7 +195,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.navigation_product);
+        navigation.setSelectedItemId(R.id.navigation_2);
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
 
         List<Cart> listCart = cartDAO.getCart(account.getId());
@@ -199,6 +205,14 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(CartActivity.this));
 
         txt_total_price.setText(currencyFormatter.format(0));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 2222) {
+            finish();
+        }
     }
 
 

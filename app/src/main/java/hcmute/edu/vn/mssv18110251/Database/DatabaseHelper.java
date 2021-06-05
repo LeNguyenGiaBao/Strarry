@@ -14,9 +14,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_CATEGORY = "category";
     public static final String COLUMN_ID_CATEGORY = "id_category";
     public static final String COLUMN_NAME_CATEGORY = "name_category";
+    public static final String COLUMN_IMAGE_CATEGORY = "image_category";
     private static final String DATABASE_CREATE_CATEGORY = "create table " + TABLE_CATEGORY + "( "
             + COLUMN_ID_CATEGORY + " integer primary key autoincrement, "
-            + COLUMN_NAME_CATEGORY + " text not null);";
+            + COLUMN_NAME_CATEGORY + " text not null, "
+            + COLUMN_IMAGE_CATEGORY + " blob);";
 
 
     // product

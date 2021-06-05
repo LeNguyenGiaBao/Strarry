@@ -17,7 +17,8 @@ public class CategoryDAO {
     private DatabaseHelper dbHelper;
     private String[] allColumns = {
             DatabaseHelper.COLUMN_ID_CATEGORY,
-            DatabaseHelper.COLUMN_NAME_CATEGORY};
+            DatabaseHelper.COLUMN_NAME_CATEGORY,
+            DatabaseHelper.COLUMN_IMAGE_CATEGORY};
 
     public CategoryDAO(Context context){
         dbHelper = new DatabaseHelper(context);
@@ -31,14 +32,16 @@ public class CategoryDAO {
         dbHelper.close();
     }
 
-    public void addCategory(Category category){
+    public boolean addCategory(Category category){
+        this.open();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_NAME_CATEGORY, category.getName());
-        database.insert(DatabaseHelper.TABLE_CATEGORY, null, values);
-    }
-
-    public void Reset(){
-        dbHelper.onReset(database);
+        values.put(DatabaseHelper.COLUMN_IMAGE_CATEGORY, category.getImage());
+        long success = database.insert(DatabaseHelper.TABLE_CATEGORY, null, values);
+        if(success!=-1){
+            return true;
+        }
+        return false;
     }
 
     public List<Category> getCategory(){

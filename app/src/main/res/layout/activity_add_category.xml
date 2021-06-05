@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCategoryActivity">
+    <TextView
+        android:id="@+id/txt_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textColor="@color/BlueViolet"
+        android:textSize="25dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:layout_margin="@dimen/padding"
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:cropToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/txt_product"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        android:src="@drawable/ic_baseline_add_photo_alternate_24"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_remove"
+        app:layout_constraintTop_toBottomOf="@id/imgView"
+        tools:layout_editor_absoluteX="16dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product"
+                android:backgroundTint="@color/white">
+                <EditText
+                    android:id="@+id/name_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Category Name..."
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/add_edit_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/navigation">
+
+        <Button
+            android:id="@+id/btn_add_category"
+            style="@style/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16dp"
+            android:text="Add Category" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@color/custom_color_bottom_navigato_bar"
+        app:itemTextColor="@color/custom_color_bottom_navigato_bar"
+        app:menu="@menu/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

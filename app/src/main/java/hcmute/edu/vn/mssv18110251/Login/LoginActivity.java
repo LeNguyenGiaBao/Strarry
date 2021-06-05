@@ -12,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
+import hcmute.edu.vn.mssv18110251.CategoryActivity;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
 import hcmute.edu.vn.mssv18110251.MainActivity;
 import hcmute.edu.vn.mssv18110251.Model.Account;
+import hcmute.edu.vn.mssv18110251.Model.Category;
 import hcmute.edu.vn.mssv18110251.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,8 +49,10 @@ public class LoginActivity extends AppCompatActivity {
 
         Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
         if(account1!=null){
-            Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(homePage);
+            if(account1.getRole()==0){
+                Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
+                startActivity(homePage);
+            }
         }
 
         btn_login = findViewById(R.id.btn_login);
@@ -63,9 +67,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
 
                     Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
-                    Log.d("LOGIN", String.valueOf(account1.getId()));
-                    Intent homePage = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(homePage);
+                    if(account1.getRole()==0) {
+                        Log.d("LOGIN", String.valueOf(account1.getId()));
+                        Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
+                        startActivity(homePage);
+                    }
                 }
             }
         });

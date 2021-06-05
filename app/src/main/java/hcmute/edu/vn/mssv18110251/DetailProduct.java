@@ -35,7 +35,7 @@ public class DetailProduct extends AppCompatActivity {
     TextView productPrice;
     TextView quantity_number;
     TextView description;
-    ImageView imageView;
+    ImageView imageView, back_button;
     ImageButton plus_quantity, minus_quantity;
     Button add_to_cart;
     int quantity = 1, price;
@@ -57,6 +57,14 @@ public class DetailProduct extends AppCompatActivity {
         Intent intent = getIntent();
         String message = intent.getStringExtra("POSITION");
         Log.d("CREATION", message);
+
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         productDAO = new ProductDAO(this);

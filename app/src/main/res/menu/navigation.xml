@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_product"
+        android:id="@+id/navigation_1"
         android:icon="@drawable/ic_strawberry"
         android:title="Product" />
 
     <item
-        android:id="@+id/navigation_event"
+        android:id="@+id/navigation_2"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Cart" />
 
     <item
-        android:id="@+id/navigation_notification"
+        android:id="@+id/navigation_3"
         android:icon="@drawable/ic_baseline_assignment_24"
         android:title="Bill" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_4"
         android:icon="@drawable/ic_baseline_manage_accounts_24"
         android:title="Account" />
 

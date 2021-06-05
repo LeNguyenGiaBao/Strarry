@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,46 +39,65 @@ public class MainActivity extends AppCompatActivity {
     private ProductAdapter productAdapter;
     private ActionBar toolbar;
 
-    Button product_manager;
+    ImageView back_button;
     Intent event_intent, cart_intent, profile_intent;
     private SharePreferenceClass SharedPreferenceClass;
+    Integer id_category;
+    String name_category;
+    TextView txt_category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        id_category = intent.getIntExtra("ID_CATEGORY", 0);
+        name_category = intent.getStringExtra("NAME_CATEGORY");
+
+
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        txt_category = findViewById(R.id.txt_category);
+        txt_category.setText(name_category);
+
 //        toolbar = getSupportActionBar();
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.navigation_product);
+        navigation.setSelectedItemId(R.id.navigation_1);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.navigation_product:
+                    case R.id.navigation_1:
                         return true;
-                    case R.id.navigation_event:
+                    case R.id.navigation_2:
 //                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
-                        event_intent = new Intent(getApplicationContext(), BillActivity.class);
-                        startActivity(event_intent);
+                        Intent cart_intent = new Intent(getApplicationContext(), CartActivity.class);
+                        startActivity(cart_intent);
 //                        overridePendingTransition(0, 0);
                         return true;
-                    case R.id.navigation_notification:
-                        cart_intent = new Intent(getApplicationContext(), CartActivity.class);
-                        startActivity(cart_intent);
+                    case R.id.navigation_3:
+                        Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                        startActivity(bill_intent);
                         return true;
-                    case R.id.navigation_profile:
-                        profile_intent = new Intent(getApplicationContext(), ProductManage.class);
+                    case R.id.navigation_4:
+                        Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
                         startActivity(profile_intent);
-                        overridePendingTransition(0, 0);
+//                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
             }
         });
+
         // for hiding navigation bar when scroll
 //        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
 //        layoutParams.setBehavior(new BottomNavigationBehavior());
@@ -123,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recyclerView);
 
-        List<Product> products =  productDAO.getProducts();
+        List<Product> products =  productDAO.getProducts(id_category);
         productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
 
         recyclerView.setAdapter(productAdapter);
@@ -137,14 +159,16 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
 //            }
 //        });
+
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setSelectedItemId(R.id.navigation_product);
-        List<Product> products =  productDAO.getProducts();
+        navigation.setSelectedItemId(R.id.navigation_1);
+        List<Product> products =  productDAO.getProducts(id_category);
         productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
 
         recyclerView.setAdapter(productAdapter);
@@ -152,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        finish();
     }
 
 

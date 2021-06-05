@@ -67,6 +67,19 @@ public class ProductDAO {
         return products;
     }
 
+    public List<Product> getProducts(int id_category){
+        List<Product> products = new ArrayList<Product>();
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " WHERE " + DatabaseHelper.COLUMN_ID_CATEGORY_PRODUCT + " = " + id_category;
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Product product = new Product(cursor);
+                products.add(product);
+            }while (cursor.moveToNext());
+        }
+        return products;
+    }
+
     public Product get_product_by_id(int id_product){
         String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " where " + DatabaseHelper.COLUMN_ID_PRODUCT + " = " + id_product;
         Cursor cursor = database.rawQuery(query, null);
