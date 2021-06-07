@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class CartActivity extends AppCompatActivity {
     Bill_ProductDAO bill_productDAO;
     ProductDAO productDAO;
     TextView txt_total_price;
+    ImageView back_button;
+
 
     int date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -65,6 +68,8 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        Intent intent = this.getIntent();
+        Integer intent_from = intent.getIntExtra("FROM", 0);
         Log.d("DATE", String.valueOf(date));
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
@@ -78,25 +83,92 @@ public class CartActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.navigation_2:
-//                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
-//                        Intent cart_intent = new Intent(getApplicationContext(), CartActivity.class);
-//                        startActivity(cart_intent);
-//                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation_1:
-                        finish();
+                        if(intent_from==1000) {
+                            finish();
+                        }
+                        if(intent_from==1300 || intent_from == 1400){
+                            setResult(1000);
+                            finish();
+                        }
+
+                        if(intent_from==1340 || intent_from == 1430){
+                            setResult(1100);
+                            finish();
+                        }
+//                        if(intent_from==4444){
+//                            setResult(4444);
+//                            finish();
+//                        }
                         return true;
                     case R.id.navigation_3:
-                        Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
-                        startActivityForResult(bill_intent, 2222);
+                        if(intent_from==1000) {
+                            Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                            bill_intent.putExtra("FROM", 1200);
+                            startActivityForResult(bill_intent, 2222);
+                        }
+                        if(intent_from==1400) {
+                            Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                            bill_intent.putExtra("FROM", 1420);
+                            startActivityForResult(bill_intent, 2222);
+                        }
+                        if(intent_from==1300 || intent_from==1430){
+                            finish();
+                        }
+                        if(intent_from ==1340){
+                            setResult(1000);
+                            finish();
+                        }
+
+//                        if(intent_from==4444){
+//                            Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+//                            bill_intent.putExtra("FROM", 2222);
+//                            startActivityForResult(bill_intent, 2222);
+//                        }
                         return true;
                     case R.id.navigation_4:
-                        Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                        startActivity(profile_intent);
-//                        overridePendingTransition(0, 0);
+                        if(intent_from==1000){
+                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            profile_intent.putExtra("FROM", 1200);
+                            startActivityForResult(profile_intent, 2222);
+                        }
+                        if(intent_from==1300){
+                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            profile_intent.putExtra("FROM", 1320);
+                            startActivityForResult(profile_intent, 2222);
+                        }
+                        if(intent_from==1400 || intent_from==1340){
+                            finish();
+                        }
+                        if(intent_from==1430){
+                            setResult(1000);
+                            finish();
+                        }
+//                        if(intent_from==1111) {
+//                            Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+//                            bill_intent.putExtra("FROM", 2222);
+//                            startActivityForResult(bill_intent, 2222);
+//                        }
+//                        if(intent_from==3333){
+//                            Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+//                            bill_intent.putExtra("FROM", 2222);
+//                            startActivityForResult(bill_intent, 2222);
+//                        }
+//                        if(intent_from==4444){
+//                            finish();
+//                        }
                         return true;
                 }
                 return false;
+            }
+        });
+
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -210,7 +282,11 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 2222) {
+        if(resultCode==1000){
+            finish();
+        }
+        if(resultCode==1100){
+            setResult(1000);
             finish();
         }
     }

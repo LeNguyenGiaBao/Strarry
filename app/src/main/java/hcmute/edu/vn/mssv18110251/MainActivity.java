@@ -79,19 +79,19 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_1:
                         return true;
                     case R.id.navigation_2:
-//                        event_intent = new Intent(getApplicationContext(), ProductManage.class);
                         Intent cart_intent = new Intent(getApplicationContext(), CartActivity.class);
+                        cart_intent.putExtra("FROM", 1000);
                         startActivity(cart_intent);
-//                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.navigation_3:
                         Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                        bill_intent.putExtra("FROM", 1000);
                         startActivity(bill_intent);
                         return true;
                     case R.id.navigation_4:
                         Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        profile_intent.putExtra("FROM", 1000);
                         startActivity(profile_intent);
-//                        overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;

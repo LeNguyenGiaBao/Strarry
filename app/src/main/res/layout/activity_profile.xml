@@ -1,60 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CartActivity">
-    <RelativeLayout
-        android:id="@+id/r111"
+    tools:context=".ProfileActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_alignParentTop="true"
-        >
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="15dp"
+        android:paddingBottom="5dp"
+        android:background="@color/LightSkyBlue">
+
         <TextView
-            android:id="@+id/total_price"
+            android:id="@+id/txt_strarry"
+            style="@style/viewParent.headerText.NoMode"
+            android:text="Strarry"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/txtCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            app:layout_constraintLeft_toRightOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginLeft="50dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_margin="@dimen/padding"
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:cropToPadding="false"
+        app:layout_constraintTop_toBottomOf="@+id/header_title"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
+        android:src="@drawable/ic_baseline_account_circle_24"/>
+    <ImageView
+        android:id="@+id/btn_logout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_logout_24"
+        app:layout_constraintTop_toBottomOf="@id/header_title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_edit_remove"
+        app:layout_constraintTop_toBottomOf="@id/imgView"
+        tools:layout_editor_absoluteX="16dp">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Price"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-            />
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/msg1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textAlignment="center"
-        android:layout_centerVertical="true"
-        android:text="Congratulations, Your Final order has been placed successfully. Soon it will be verified"
-        android:textSize="20dp"
-        android:visibility="gone"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cart_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/r111"
-        android:layout_above="@+id/next_btn">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product"
+                android:backgroundTint="@color/white">
+                <EditText
+                    android:id="@+id/account_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Name..."
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.recyclerview.widget.RecyclerView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+                <EditText
+                    android:id="@+id/account_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Email..."
+                    android:inputType="textEmailAddress"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+                <EditText
+                    android:id="@+id/account_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Phone..."
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+                <EditText
+                    android:id="@+id/account_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Address..."
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/parent"
+                android:layout_marginTop="@dimen/add_product">
+                <EditText
+                    android:id="@+id/account_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:hint="Password..."
+                    android:inputType="textPassword"
+                    android:maxLines="3"
+                    android:padding="20dp"
+                    style="@style/modifiedEditText"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
     <Button
-        android:id="@+id/next_btn"
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/loginButton"
+        android:text="Update"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
-        android:text="Next"
-        android:textColor="@android:color/white"
-        android:textSize="25dp"
+        app:itemBackground="@color/WhiteSmoke"
+        app:itemIconTint="@color/custom_color_bottom_navigato_bar"
+        app:itemTextColor="@color/custom_color_bottom_navigato_bar"
+        app:menu="@menu/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

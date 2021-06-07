@@ -55,8 +55,7 @@ public class DetailProduct extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String message = intent.getStringExtra("POSITION");
-        Log.d("CREATION", message);
+        Integer id_product = intent.getIntExtra("ID_PRODUCT", 0);
 
         back_button = findViewById(R.id.back_button);
         back_button.setOnClickListener(new View.OnClickListener() {
@@ -69,16 +68,15 @@ public class DetailProduct extends AppCompatActivity {
 
         productDAO = new ProductDAO(this);
         productDAO.open();
-        List<Product> products =  productDAO.getProducts();
+//        List<Product> products =  productDAO.getProducts();
 
-        Integer position = Integer.parseInt(message);
-        Product product = products.get(position);
+        Product product = productDAO.get_product_by_id(id_product);
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         quantity_number = findViewById(R.id.quantity);
         description = findViewById(R.id.descriptioninfo);
 
-        Integer id_product = product.getId();
+        Log.d("Detail_Product", String.valueOf(id_product));
         productName.setText(product.getName());
         Locale locale = new Locale("vn", "VN");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
@@ -121,15 +119,8 @@ public class DetailProduct extends AppCompatActivity {
             public void onClick(View v) {
                 Integer id_account  = account.getId();
                 Integer id_cart = cartDAO.get_id_cart(id_account, id_product);
-                if(id_cart==-1) {
-                    Cart cart = new Cart(id_account, id_product, quantity);
-                    boolean success = cartDAO.add_to_cart(cart);
-                    if (success) {
-                        Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
-                    }
-                } else {
+                Log.d("ID_CART", String.valueOf(id_cart));
+                if(id_cart>0) {
                     Cart cart = cartDAO.get_cart_by_id(id_cart);
                     int init_amount = cart.getAmount();
                     cart.setAmount(init_amount + quantity);
@@ -139,6 +130,15 @@ public class DetailProduct extends AppCompatActivity {
                     } else {
                         Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
                     }
+                } else {
+                    Cart cart = new Cart(id_account, id_product, quantity);
+                    boolean success = cartDAO.add_to_cart(cart);
+                    if (success) {
+                        Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         });

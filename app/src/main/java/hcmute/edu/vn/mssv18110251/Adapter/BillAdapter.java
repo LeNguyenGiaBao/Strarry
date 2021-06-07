@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import hcmute.edu.vn.mssv18110251.DAO.ProductDAO;
 import hcmute.edu.vn.mssv18110251.Model.Bill_Product;
@@ -50,20 +52,24 @@ public class BillAdapter extends BaseAdapter {
         productDAO = new ProductDAO(context);
         productDAO.open();
 
+
+        Locale locale = new Locale("vn", "VN");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+
         Bill_Product bill_product = listBillProduct.get(position);
         Product product = productDAO.get_product_by_id(bill_product.getId_product());
 
         TextView product_name = view.findViewById(R.id.product_name);
-        TextView product_price = view.findViewById(R.id.productPrice);
-        TextView product_quantity = view.findViewById(R.id.quantityinOrderSummary);
+        TextView product_price = view.findViewById(R.id.price_product);
+        TextView product_quantity = view.findViewById(R.id.quantity_product);
         TextView total_price = view.findViewById(R.id.total_price_product);
 
         product_name.setText(product.getName());
-        product_price.setText(String.valueOf(product.getPrice()));
+        product_price.setText(currencyFormatter.format(product.getPrice()));
         product_quantity.setText(String.valueOf(bill_product.getAmount_product()));
 
         int int_total_price = product.getPrice()  * bill_product.getAmount_product();
-        total_price.setText(String.valueOf(int_total_price));
+        total_price.setText(currencyFormatter.format(int_total_price));
         return view;
     }
 }

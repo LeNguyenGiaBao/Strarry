@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import hcmute.edu.vn.mssv18110251.DetailProduct;
 import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.Model.Cart;
 import hcmute.edu.vn.mssv18110251.Model.Product;
+import hcmute.edu.vn.mssv18110251.ProfileActivity;
 import hcmute.edu.vn.mssv18110251.R;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
@@ -51,6 +53,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // Gán dữ liêuk
         Product product = listProduct.get(position);
+        Log.d("Product_adapter", String.valueOf(product.getId()));
         holder.productName.setText(product.getName());
         Locale locale = new Locale("vn", "VN");
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
@@ -107,9 +110,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
             // lets get the position of the view in list and then work on it
             int position = getAbsoluteAdapterPosition();
-            String position_string = String.valueOf(position);
+            Product product = listProduct.get(position);
             Intent intent = new Intent(context, DetailProduct.class);
-            intent.putExtra("POSITION", position_string);
+            intent.putExtra("ID_PRODUCT", product.getId());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }

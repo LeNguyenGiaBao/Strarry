@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.google.zxing.WriterException;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import androidmads.library.qrgenearator.QRGContents;
 import hcmute.edu.vn.mssv18110251.Adapter.BillAdapter;
@@ -30,6 +32,7 @@ public class BillInfoActivity extends AppCompatActivity {
     List<Bill_Product> list_bill_product;
     QRGEncoder qrgEncoder;
     Bitmap bitmap;
+    ImageView back_button;
 
     ListView listView;
     @Override
@@ -44,6 +47,18 @@ public class BillInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
+        Locale locale = new Locale("vn", "VN");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         billDAO = new BillDAO(this);
         billDAO.open();
 
@@ -58,12 +73,15 @@ public class BillInfoActivity extends AppCompatActivity {
         Bill bill = billDAO.getBills(id_bill);
         list_bill_product = bill_product_dao.getBillProduct(id_bill);
 
+        TextView txtheader = findViewById(R.id.orderSummary);
         TextView txt_date = findViewById(R.id.date);
         TextView txt_total_price = findViewById(R.id.total_price);
         TextView txt_total_quantity = findViewById(R.id.total_quantity);
+
+        txtheader.setText(txtheader.getText() + "#"+ String.valueOf(id_bill));
         txt_date.setText("Date: "+ String.valueOf(bill.getAddress()) + "/" + String.valueOf(bill.getPhone()));
-        txt_total_quantity.setText("SL: " + String.valueOf(quantity));
-        txt_total_price.setText(String.valueOf(total_price));
+        txt_total_quantity.setText(String.valueOf(quantity));
+        txt_total_price.setText(currencyFormatter.format(total_price));
 
         ImageView qrCodeIV = findViewById(R.id.qrcode);
         // this is a small sample use of the QRCodeEncoder class from zxing

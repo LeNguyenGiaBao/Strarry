@@ -1,51 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_product_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/orderSummary"
-        android:text="Drink Name"
-        android:textStyle="bold"
-        android:id="@+id/product_name"
-        android:layout_marginLeft="10dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderSummary"
+            android:text="Drink Name"
+            android:textStyle="bold"
+            android:id="@+id/product_name"/>
+
+    </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/orderSummary"
-        android:layout_toRightOf="@+id/product_name"
-        android:text="x"
-        android:textStyle="bold"
-        android:id="@+id/quantityinOrderSummary"
-        android:layout_marginLeft="30dp"/>
+    <RelativeLayout
+        android:layout_below="@+id/layout_product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/productPrice"
-        android:textStyle="italic"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@id/product_name"
-        android:text="Price"/>
+        <LinearLayout
+            android:id="@+id/layout_total_price"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
 
+            <TextView
+                android:id="@+id/total_price_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:text="$10"
+                android:textStyle="bold" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layout_price_product"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="$10"
+                android:id="@+id/price_product"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="$10"
-        android:id="@+id/total_price_product"
-        android:layout_marginRight="10dp"/>
+        <LinearLayout
+            android:id="@+id/layout_quantity"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/layout_price_product">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="x"
+                android:layout_marginRight="5dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="1"
+                android:id="@+id/quantity_product"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
