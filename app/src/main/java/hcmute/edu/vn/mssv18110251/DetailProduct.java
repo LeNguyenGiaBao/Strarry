@@ -71,6 +71,7 @@ public class DetailProduct extends AppCompatActivity {
 //        List<Product> products =  productDAO.getProducts();
 
         Product product = productDAO.get_product_by_id(id_product);
+        Integer quantity_product = product.getQuantity();
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         quantity_number = findViewById(R.id.quantity);
@@ -96,8 +97,12 @@ public class DetailProduct extends AppCompatActivity {
         plus_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantity++;
-                displayQuantity();
+                if(quantity>=quantity_product){
+                    Toast.makeText(getBaseContext(), "Sorry. This product only has " + String.valueOf(quantity_product) + " pieces", Toast.LENGTH_SHORT).show();
+                } else {
+                    quantity++;
+                    displayQuantity();
+                }
             }
         });
 
@@ -123,7 +128,11 @@ public class DetailProduct extends AppCompatActivity {
                 if(id_cart>0) {
                     Cart cart = cartDAO.get_cart_by_id(id_cart);
                     int init_amount = cart.getAmount();
-                    cart.setAmount(init_amount + quantity);
+                    if(init_amount + quantity > quantity_product){
+                        cart.setAmount(quantity_product);
+                    } else {
+                        cart.setAmount(init_amount + quantity);
+                    }
                     boolean success = cartDAO.update(cart);
                     if (success) {
                         Toast.makeText(getBaseContext(), "Successful", Toast.LENGTH_LONG).show();
@@ -138,7 +147,6 @@ public class DetailProduct extends AppCompatActivity {
                     } else {
                         Toast.makeText(getBaseContext(), "False", Toast.LENGTH_LONG).show();
                     }
-
                 }
             }
         });

@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="116dp"
         android:layout_marginLeft="11dp"
         android:layout_marginRight="11dp"
         android:layout_marginTop="7dp"
@@ -32,20 +32,23 @@
                 android:layout_marginRight="20dp"/>
 
             <ImageView
-                android:layout_width="88dp"
-                android:layout_height="88dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:id="@+id/productImage"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
                 android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="10000"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:layout_marginRight="12dp"
                 android:layout_below="@+id/productName"
                 android:layout_marginLeft="12dp"
+                android:textColor="@color/Red"
                 android:id="@+id/productPrice"
                 android:layout_toRightOf="@+id/productImage" />
 

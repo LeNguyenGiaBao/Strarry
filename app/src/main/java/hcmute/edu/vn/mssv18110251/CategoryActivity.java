@@ -65,7 +65,7 @@ public class CategoryActivity extends AppCompatActivity {
                         startActivity(bill_intent);
                         return true;
                     case R.id.navigation_4:
-                        Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                        Intent profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
                         profile_intent.putExtra("FROM", 1000);
                         startActivity(profile_intent);
                         return true;

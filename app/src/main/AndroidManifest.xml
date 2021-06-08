@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Strarry">
-        <activity android:name=".AddCategoryActivity"></activity>
+        <activity android:name=".ChangePasswordActivity"></activity>
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".AddCategoryActivity" />
         <activity android:name=".CategoryActivity" />
         <activity android:name=".BillActivity" />
         <activity android:name=".AccountActivity" />

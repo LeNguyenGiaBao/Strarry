@@ -54,8 +54,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-                <EditText
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_toggle_drawable">
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPassword"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
@@ -66,8 +68,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputReplacePassword"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-                <EditText
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_toggle_drawable">
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextReplacePassword"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_replace_password_hint"

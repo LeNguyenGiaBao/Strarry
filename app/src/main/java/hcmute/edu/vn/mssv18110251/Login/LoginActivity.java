@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
+import hcmute.edu.vn.mssv18110251.AdminActivity;
 import hcmute.edu.vn.mssv18110251.CategoryActivity;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
 import hcmute.edu.vn.mssv18110251.MainActivity;
@@ -71,6 +72,10 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("LOGIN", String.valueOf(account1.getId()));
                         Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
                         startActivity(homePage);
+                    }
+                    if(account1.getRole()==1){
+                        Intent admin_intent = new Intent(getApplicationContext(), AdminActivity.class);
+                        startActivity(admin_intent);
                     }
                 }
             }

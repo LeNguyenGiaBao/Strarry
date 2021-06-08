@@ -107,8 +107,13 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
                 Cart cart = listCart.get(position);
                 Product product = productDAO.get_product_by_id(cart.getId_product());
                 quantity = cart.getAmount();
-
-                quantity++;
+                Integer quantity_product = product.getQuantity();
+//                quantity++;
+                if(quantity>=quantity_product){
+                    Toast.makeText(context, "Sorry. This product only has " + String.valueOf(quantity_product) + " pieces", Toast.LENGTH_SHORT).show();
+                } else {
+                    quantity++;
+                }
                 holder.productQuantity.setText(String.valueOf(quantity));
                 Integer total_price = product.getPrice() * quantity;
                 holder.totalPrice.setText(currencyFormatter.format(total_price));

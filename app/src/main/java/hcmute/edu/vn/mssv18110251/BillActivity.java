@@ -111,12 +111,12 @@ public class BillActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_4:
                         if(intent_from==1000){
-                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            Intent profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
                             profile_intent.putExtra("FROM", 1300);
                             startActivityForResult(profile_intent, 2222);
                         }
                         if(intent_from==1200){
-                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            Intent profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
                             profile_intent.putExtra("FROM", 1230);
                             startActivityForResult(profile_intent, 2222);
                         }

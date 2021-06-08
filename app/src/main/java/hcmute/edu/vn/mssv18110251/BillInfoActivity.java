@@ -78,7 +78,7 @@ public class BillInfoActivity extends AppCompatActivity {
         TextView txt_total_price = findViewById(R.id.total_price);
         TextView txt_total_quantity = findViewById(R.id.total_quantity);
 
-        txtheader.setText(txtheader.getText() + "#"+ String.valueOf(id_bill));
+        txtheader.setText(txtheader.getText() + " #"+ String.valueOf(id_bill));
         txt_date.setText("Date: "+ String.valueOf(bill.getAddress()) + "/" + String.valueOf(bill.getPhone()));
         txt_total_quantity.setText(String.valueOf(quantity));
         txt_total_price.setText(currencyFormatter.format(total_price));

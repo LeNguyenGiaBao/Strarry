@@ -31,7 +31,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            android:layout_marginLeft="20dp"/>
+            android:layout_marginLeft="20dp"
+            app:tint="@color/black"/>
 
         <TextView
             android:id="@+id/txtCart"
@@ -43,7 +44,7 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="10dp"/>
 
 
 
@@ -58,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/header_title"
         app:layout_constraintBottom_toTopOf="@id/bottom_button"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="10dp"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout

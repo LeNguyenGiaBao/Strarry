@@ -10,17 +10,17 @@ public class Account {
     private String address;
     private int role;
     private String email;
-    private String gender;
+    private byte[] image;
 
 
-    public Account(String name, String password, String phone, String address, int role, String email, String gender) {
+    public Account(String name, String password, String phone, String address, int role, String email, byte[] image) {
         this.name = name;
         this.password = password;
         this.phone = phone;
         this.address = address;
         this.role = role;
         this.email = email;
-        this.gender = gender;
+        this.image = image;
     }
 
     public Account(Cursor cursor) {
@@ -31,8 +31,9 @@ public class Account {
         this.address = cursor.getString(cursor.getColumnIndex("address_account"));
         this.role = cursor.getInt(cursor.getColumnIndex("role_account"));
         this.email = cursor.getString(cursor.getColumnIndex("email_account"));
-        this.gender = cursor.getString(cursor.getColumnIndex("gender_account"));
+        this.image = cursor.getBlob(cursor.getColumnIndex("image_account"));
     }
+
 
     public int getId() {
         return id;
@@ -90,13 +91,11 @@ public class Account {
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
-
-
 }

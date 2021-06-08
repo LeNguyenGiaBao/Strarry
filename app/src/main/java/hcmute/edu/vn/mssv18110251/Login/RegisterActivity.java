@@ -48,10 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = txt_email.getText().toString();
                 String password = txt_password.getText().toString();
                 String password2 = txt_password_2.getText().toString();
-                Toast.makeText(RegisterActivity.this, password, Toast.LENGTH_LONG).show();
+                byte[] byteArray = new byte[0];
+//                Toast.makeText(RegisterActivity.this, password, Toast.LENGTH_LONG).show();
                 if(password.equals(password2)){
-//                    Toast.makeText(RegisterActivity.this, "Buoc 1", Toast.LENGTH_LONG).show();
-                    Account account = new Account("", password, "", "", 0, email, "");
+                    Account account = new Account("", password, "", "", 0, email, byteArray);
                     boolean success = accountDAO.addAccount(account);
                     if(success) {
                         Toast.makeText(RegisterActivity.this, "Successful", Toast.LENGTH_LONG).show();

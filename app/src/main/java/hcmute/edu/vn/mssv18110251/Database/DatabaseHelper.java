@@ -49,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ADDRESS_ACCOUNT = "address_account";
     public static final String COLUMN_ROLE_ACCOUNT = "role_account";
     public static final String COLUMN_EMAIL_ACCOUNT = "email_account";
-    public static final String COLUMN_GENDER_ACCOUNT = "gender_account";
+    public static final String COLUMN_IMAGE_ACCOUNT = "image_account";
     private static final String DATABASE_CREATE_ACCOUNT = "create table " + TABLE_ACCOUNT + "( "
             + COLUMN_ID_ACCOUNT + " integer primary key autoincrement, "
             + COLUMN_NAME_ACCOUNT + " text, "
@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_ADDRESS_ACCOUNT + " text, "
             + COLUMN_ROLE_ACCOUNT + " integer, "
             + COLUMN_EMAIL_ACCOUNT + " text not null, "
-            + COLUMN_GENDER_ACCOUNT + " text);";
+            + COLUMN_IMAGE_ACCOUNT + " blob);";
 
     // bill
     public static final String TABLE_BILL = "bill";

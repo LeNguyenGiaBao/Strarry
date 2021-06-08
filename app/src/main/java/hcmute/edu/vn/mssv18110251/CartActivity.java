@@ -129,12 +129,12 @@ public class CartActivity extends AppCompatActivity {
                         return true;
                     case R.id.navigation_4:
                         if(intent_from==1000){
-                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            Intent profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
                             profile_intent.putExtra("FROM", 1200);
                             startActivityForResult(profile_intent, 2222);
                         }
                         if(intent_from==1300){
-                            Intent profile_intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                            Intent profile_intent = new Intent(getApplicationContext(), AccountActivity.class);
                             profile_intent.putExtra("FROM", 1320);
                             startActivityForResult(profile_intent, 2222);
                         }
@@ -208,6 +208,10 @@ public class CartActivity extends AppCompatActivity {
                         Integer id_product = cart.getId_product();
                         Integer amount = cart.getAmount();
                         Product product = productDAO.get_product_by_id(id_product);
+//                        if(amount>product.getQuantity())
+//                        {
+//                            Toast.makeText(getBaseContext(), "Sorry. This product only has " + String.valueOf(product.getQuantity()) + " pieces", Toast.LENGTH_SHORT).show();
+//                        }
                         total_price += product.getPrice() * amount;
                     }
                     txt_total_price.setText(currencyFormatter.format(total_price));

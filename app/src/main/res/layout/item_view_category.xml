@@ -23,7 +23,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
+                android:layout_height="150dp"
                 android:id="@+id/categoryImage"
                 android:layout_marginTop="4dp"
                 android:scaleType="centerCrop"/>
@@ -38,7 +38,7 @@
                 android:textSize="26sp"
                 android:layout_alignParentLeft="true"
                 tools:text="Green Tea"
-                android:textColor="@color/Red" />
+                android:textColor="@color/white" />
 
         </RelativeLayout>
 

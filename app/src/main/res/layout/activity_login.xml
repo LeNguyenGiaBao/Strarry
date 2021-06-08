@@ -29,6 +29,7 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     style="@style/viewParent.headerText.NoMode"
+                    android:layout_marginLeft="10dp"
                     android:text="Strarry"/>
 
                 <ImageView
@@ -54,8 +55,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-                <EditText
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/password_toggle_drawable">
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextPassword"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
