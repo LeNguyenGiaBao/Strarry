@@ -1,8 +1,10 @@
-package hcmute.edu.vn.mssv18110251;
+package hcmute.edu.vn.mssv18110251.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import hcmute.edu.vn.mssv18110251.R;
 
 public class AdminActivity extends AppCompatActivity {
 

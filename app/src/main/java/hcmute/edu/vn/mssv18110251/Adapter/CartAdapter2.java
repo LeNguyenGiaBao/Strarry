@@ -83,27 +83,31 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
         Integer total_price = product.getPrice() * cart.getAmount();
         holder.totalPrice.setText(currencyFormatter.format(total_price));
 
+        if(product.getQuantity()<quantity){
+            holder.checkBox.setEnabled(false);
+        }
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    if(!product_to_purchase.contains(position)){
+                if (isChecked) {
+                    if (!product_to_purchase.contains(position)) {
                         product_to_purchase.add(position);
                         Log.d("CHECKED", String.valueOf(position));
                     }
                 } else {
-                    if(product_to_purchase.contains(position)){
+                    if (product_to_purchase.contains(position)) {
                         product_to_purchase.remove(new Integer(position));
                         Log.d("UNCHECKED", String.valueOf(position));
                     }
                 }
+
             }
         });
 
         holder.add_amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CartAdapter2_Position", String.valueOf(position));
+//                Log.d("CartAdapter2_Position", String.valueOf(position));
                 Cart cart = listCart.get(position);
                 Product product = productDAO.get_product_by_id(cart.getId_product());
                 quantity = cart.getAmount();
@@ -128,7 +132,7 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
         holder.minus_amount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CartAdapter2_Position", String.valueOf(position));
+//                Log.d("CartAdapter2_Position", String.valueOf(position));
                 Cart cart = listCart.get(position);
                 Product product = productDAO.get_product_by_id(cart.getId_product());
                 quantity = cart.getAmount();
@@ -154,7 +158,7 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
         holder.remove_from_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("CartAdapter2_Position", String.valueOf(position));
+//                Log.d("CartAdapter2_Position", String.valueOf(position));
                 Cart cart = listCart.get(position);
                 cartDAO.remove(cart);
                 removeItem(position);
@@ -200,3 +204,5 @@ public class CartAdapter2 extends RecyclerView.Adapter<CartAdapter2.ViewHolder> 
         }
     }
 }
+
+

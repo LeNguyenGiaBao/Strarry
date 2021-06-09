@@ -246,6 +246,8 @@ public class CartActivity extends AppCompatActivity {
                         total_quantity+= amount;
 
                         cartDAO.remove(cart);
+                        product.setQuantity(product.getQuantity() - amount);
+                        int success = productDAO.updateProduct(product);
                     }
                     Log.d("CART ACTIVITY", String.valueOf(bill.getPrice()));
                     if(billDAO.update(id_bill, total_price)){

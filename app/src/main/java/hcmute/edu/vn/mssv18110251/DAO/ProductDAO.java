@@ -111,7 +111,6 @@ public class ProductDAO {
         values.put(DatabaseHelper.COLUMN_QUANTITY_PRODUCT, product.getQuantity());
         values.put(DatabaseHelper.COLUMN_IMAGE_PRODUCT, product.getImage());
         values.put(DatabaseHelper.COLUMN_ID_CATEGORY, product.getId_category());
-        database.insert(DatabaseHelper.TABLE_PRODUCT, null, values);
         return database.update(DatabaseHelper.TABLE_PRODUCT, values, DatabaseHelper.COLUMN_ID_PRODUCT + "=?", new String[]{String.valueOf(product.getId())});
     }
 

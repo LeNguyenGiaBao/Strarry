@@ -31,28 +31,31 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="20dp"
                 android:id="@+id/bill_price"
-                android:layout_alignParentRight="true"/>
+                android:layout_toLeftOf="@+id/go_to"
+                android:textColor="@color/Green"
+                android:textStyle="bold"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="10000"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/bill_quantity"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/bill_price"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:text="10000"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:id="@+id/bill_quantity"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_below="@+id/bill_price"/>-->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/date_bill"
                 android:textStyle="italic"
                 android:textSize="26sp"
                 android:layout_toRightOf="@+id/productImage"
-                tools:text="Date"/>
+                tools:text="Date"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +65,19 @@
                 android:id="@+id/id_bill"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
-                tools:text="ID BILL"/>
+                android:layout_marginBottom="10dp"
+                tools:text="ID BILL"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/go_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:layout_marginRight="20dp"
+                app:tint="@color/black"
+                android:layout_centerVertical="true"/>
 
 
         </RelativeLayout>

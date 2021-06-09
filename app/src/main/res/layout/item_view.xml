@@ -60,6 +60,7 @@
                 android:id="@+id/productName"
                 android:textStyle="italic"
                 android:textSize="26sp"
+                android:textColor="@color/black"
                 android:layout_toRightOf="@+id/productImage"
                 tools:text="Green Tea"/>
 
@@ -71,7 +72,8 @@
                 android:id="@+id/productDescription"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
-                tools:text="Click  to Order"/>
+                tools:text="Click  to Order"
+                android:textColor="@color/black"/>
 
 
         </RelativeLayout>

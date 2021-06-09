@@ -64,7 +64,7 @@
                 android:layout_below="@+id/productImage"
                 android:text="Drink Name"
                 android:textColor="@android:color/holo_red_light"
-                android:textSize="30sp"
+                android:textSize="26sp"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
                 android:id="@+id/productName"/>
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10000"
-                android:textColor="@android:color/holo_red_light"
+                android:textColor="@color/Green"
                 android:id="@+id/productPrice"
                 android:layout_alignRight="@+id/productName"
                 android:layout_alignParentEnd="true"
@@ -122,7 +122,8 @@
                 android:layout_marginRight="20dp"
                 android:id="@+id/quantity"
                 android:textSize="28sp"
-                android:layout_toRightOf="@+id/addquantity"/>
+                android:layout_toRightOf="@+id/addquantity"
+                android:textColor="@color/black"/>
 
 
             <ImageButton
@@ -142,7 +143,8 @@
                 android:id="@+id/txt_description"
                 android:textStyle="italic"
                 android:textSize="15sp"
-                android:layout_below="@+id/addquantity"/>
+                android:layout_below="@+id/addquantity"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,7 +154,8 @@
                 android:id="@+id/descriptioninfo"
                 android:textStyle="italic"
                 android:textSize="15sp"
-                android:layout_below="@+id/txt_description"/>
+                android:layout_below="@+id/txt_description"
+                android:textColor="@color/black"/>
 
 
             <Button

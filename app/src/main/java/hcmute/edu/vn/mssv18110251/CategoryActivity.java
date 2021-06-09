@@ -55,12 +55,12 @@ public class CategoryActivity extends AppCompatActivity {
                     case R.id.navigation_1:
                         return true;
                     case R.id.navigation_2:
-                        Intent cart_intent = new Intent(getApplicationContext(), CartActivity.class);
+                        Intent cart_intent = new Intent(getApplicationContext(), AddCategoryActivity.class);
                         cart_intent.putExtra("FROM", 1000);
                         startActivity(cart_intent);
                         return true;
                     case R.id.navigation_3:
-                        Intent bill_intent = new Intent(getApplicationContext(), BillActivity.class);
+                        Intent bill_intent = new Intent(getApplicationContext(), ProductManage.class);
                         bill_intent.putExtra("FROM", 1000);
                         startActivity(bill_intent);
                         return true;

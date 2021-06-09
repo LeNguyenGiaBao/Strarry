@@ -7,17 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
-import hcmute.edu.vn.mssv18110251.AdminActivity;
+import hcmute.edu.vn.mssv18110251.Admin.AdminActivity;
 import hcmute.edu.vn.mssv18110251.CategoryActivity;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
-import hcmute.edu.vn.mssv18110251.MainActivity;
 import hcmute.edu.vn.mssv18110251.Model.Account;
-import hcmute.edu.vn.mssv18110251.Model.Category;
 import hcmute.edu.vn.mssv18110251.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -77,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
                         Intent admin_intent = new Intent(getApplicationContext(), AdminActivity.class);
                         startActivity(admin_intent);
                     }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Please Try Again", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -22,7 +22,7 @@ import hcmute.edu.vn.mssv18110251.Model.Account;
 
 public class AccountActivity extends AppCompatActivity {
 
-    ImageView btn_logout, profile, changepassword, support, image_account;
+    ImageView btn_logout, profile, changepassword, support, image_account, back_button;
     TextView name_account;
     private SharePreferenceClass SharedPreferenceClass;
 
@@ -39,6 +39,13 @@ public class AccountActivity extends AppCompatActivity {
         name_account = findViewById(R.id.name_account);
         set_info_account(account);
 
+        back_button = findViewById(R.id.back_button);
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btn_logout = findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +76,15 @@ public class AccountActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent change_password_intent = new Intent(getBaseContext(), ChangePasswordActivity.class);
                 startActivity(change_password_intent);
+            }
+        });
+
+        support = findViewById(R.id.support);
+        support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent support_intent = new Intent(getBaseContext(), SupportActivity.class);
+                startActivity(support_intent);
             }
         });
 

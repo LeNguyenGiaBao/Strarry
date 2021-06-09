@@ -32,13 +32,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/categoryName"
                 android:textStyle="italic"
                 android:textSize="26sp"
                 android:layout_alignParentLeft="true"
                 tools:text="Green Tea"
-                android:textColor="@color/white" />
+                android:textColor="@color/Red" />
 
         </RelativeLayout>
 
