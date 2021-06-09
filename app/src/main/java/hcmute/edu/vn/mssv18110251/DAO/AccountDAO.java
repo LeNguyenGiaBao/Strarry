@@ -40,6 +40,7 @@ public class AccountDAO {
     }
 
     public boolean addAccount(Account account){
+        this.open();
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_NAME_ACCOUNT, account.getName());
         values.put(DatabaseHelper.COLUMN_PASSWORD_ACCOUNT, account.getPassword());
@@ -56,8 +57,8 @@ public class AccountDAO {
         return false;
     }
 
-    public Account checkAccount(String email, String password){
-        String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " where email_account = '" + email + "' and password_account = '" + password + "'";
+    public Account checkAccount(String phone, String password){
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " where phone_account = '" + phone + "' and password_account = '" + password + "'";
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{
@@ -68,6 +69,17 @@ public class AccountDAO {
             }while (cursor.moveToNext());
         }
         return null;
+    }
+
+    public boolean checkPhone(String phone){
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " where phone_account = '" + phone + "'";
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                return true;
+            }while (cursor.moveToNext());
+        }
+        return false;
     }
 
     public boolean update(Account account){

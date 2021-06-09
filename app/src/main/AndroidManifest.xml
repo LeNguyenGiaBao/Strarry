@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Strarry">
-        <activity android:name=".SupportActivity"></activity>
+        <activity android:name=".Login.ForgetPasswordActivity"></activity>
+        <activity android:name=".VerifyOTPActivity" />
+        <activity android:name=".SupportActivity" />
         <activity android:name=".ChangePasswordActivity" />
         <activity android:name=".Admin.AdminActivity" />
         <activity android:name=".AddCategoryActivity" />

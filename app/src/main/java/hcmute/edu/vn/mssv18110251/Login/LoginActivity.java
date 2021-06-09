@@ -19,7 +19,7 @@ import hcmute.edu.vn.mssv18110251.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView go_to_register, email, password;
+    TextView go_to_register, phone, password, forget_password;
 
     Button btn_login;
     private AccountDAO accountDAO;
@@ -33,8 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         accountDAO = new AccountDAO(this);
         accountDAO.open();
 
-        email = findViewById(R.id.editTextEmail);
+        phone = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
+
+        forget_password = findViewById(R.id.forget_password);
+        forget_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgetpass = new Intent(getBaseContext(), ForgetPasswordActivity.class);
+                startActivity(forgetpass);
+            }
+        });
 
         go_to_register = findViewById(R.id.go_to_register);
         go_to_register.setOnClickListener(new View.OnClickListener() {
@@ -57,20 +66,21 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email_string = email.getText().toString();
+                String phoneNumber = phone.getText().toString();
                 String password_string = password.getText().toString();
-                Account account = accountDAO.checkAccount(email_string, password_string);
+                Account account = accountDAO.checkAccount(phoneNumber, password_string);
                 if(account != null){
                     SharedPreferenceClass.getInstance(getBaseContext()).set("account", account);
                     Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
 
-                    Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
-                    if(account1.getRole()==0) {
-                        Log.d("LOGIN", String.valueOf(account1.getId()));
+//                    Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+                    if(account.getRole()==0) {
+                        Log.d("LOGIN", String.valueOf(account.getId()));
                         Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
+                        homePage.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(homePage);
                     }
-                    if(account1.getRole()==1){
+                    if(account.getRole()==1){
                         Intent admin_intent = new Intent(getApplicationContext(), AdminActivity.class);
                         startActivity(admin_intent);
                     }

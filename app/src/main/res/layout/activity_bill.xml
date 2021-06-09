@@ -46,10 +46,6 @@
             android:textSize="20sp"
             android:layout_marginLeft="10dp"/>
 
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

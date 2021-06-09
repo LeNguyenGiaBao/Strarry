@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "720174249926",
+    "project_id": "strarry-97238",
+    "storage_bucket": "strarry-97238.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720174249926:android:39a1f3681a490f6fa5a4c7",
+        "android_client_info": {
+          "package_name": "hcmute.edu.vn.mssv18110251"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720174249926-jdspg8uhfuluqtajqlu8ja7o8dsd9m5l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hcmute.edu.vn.mssv18110251",
+            "certificate_hash": "a56dcdd4be77c5aca92fde2d12019054756bff02"
+          }
+        },
+        {
+          "client_id": "720174249926-j0d246uqakkfhga21f1v35di9ffmqag9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbAbI2YY_BIXBImrJWWbYXxrhPelq32iU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720174249926-j0d246uqakkfhga21f1v35di9ffmqag9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

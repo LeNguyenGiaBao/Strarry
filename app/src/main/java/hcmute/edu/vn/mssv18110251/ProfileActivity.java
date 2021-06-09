@@ -94,15 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
                 } else {
                     account.setName("");
                 }
-                if(account_phone.getText().toString()!="") {
-                    account.setPhone(account_phone.getText().toString());
+                if(account_email.getText().toString()!="") {
+                    account.setEmail(account_email.getText().toString());
                 } else {
-                    account.setPhone("");
-                }
-                if(account_phone.getText().toString()!="") {
-                    account.setPhone(account_phone.getText().toString());
-                } else {
-                    account.setPhone("");
+                    account.setEmail("");
                 }
 
                 if(image_product!=null) {

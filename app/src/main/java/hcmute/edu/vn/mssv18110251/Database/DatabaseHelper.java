@@ -54,10 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_ID_ACCOUNT + " integer primary key autoincrement, "
             + COLUMN_NAME_ACCOUNT + " text, "
             + COLUMN_PASSWORD_ACCOUNT + " text not null, "
-            + COLUMN_PHONE_ACCOUNT + " text, "
+            + COLUMN_PHONE_ACCOUNT + " text not null, "
             + COLUMN_ADDRESS_ACCOUNT + " text, "
             + COLUMN_ROLE_ACCOUNT + " integer, "
-            + COLUMN_EMAIL_ACCOUNT + " text not null, "
+            + COLUMN_EMAIL_ACCOUNT + " text, "
             + COLUMN_IMAGE_ACCOUNT + " blob);";
 
     // bill
