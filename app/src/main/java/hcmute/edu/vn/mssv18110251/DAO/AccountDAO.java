@@ -71,15 +71,17 @@ public class AccountDAO {
         return null;
     }
 
-    public boolean checkPhone(String phone){
+    public Account checkPhone(String phone){
         String query = "SELECT * FROM " + DatabaseHelper.TABLE_ACCOUNT + " where phone_account = '" + phone + "'";
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{
-                return true;
+                Account account = new Account(cursor);
+
+                return account;
             }while (cursor.moveToNext());
         }
-        return false;
+        return null;
     }
 
     public boolean update(Account account){

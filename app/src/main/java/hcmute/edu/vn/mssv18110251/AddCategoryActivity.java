@@ -72,6 +72,7 @@ public class AddCategoryActivity extends AppCompatActivity {
                 Category category = new Category(name, byteArray);
                 if(categoryDAO.addCategory(category)){
                     Toast.makeText(AddCategoryActivity.this, "Category has been added successfully!", Toast.LENGTH_LONG).show();
+                    name_category.setText("");
                 } else {
                     Toast.makeText(AddCategoryActivity.this, "Error!", Toast.LENGTH_LONG).show();
                 }

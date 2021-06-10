@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(accountDAO.checkPhone(phoneNumber))
+                if(accountDAO.checkPhone(phoneNumber)!=null)
                 {
                     createDialog("The phone number is existed !","Notification");
                     return;
