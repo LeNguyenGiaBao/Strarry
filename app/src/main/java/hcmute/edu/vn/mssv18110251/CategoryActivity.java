@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,6 +33,8 @@ public class CategoryActivity extends AppCompatActivity {
     CategoryDAO categoryDAO;
     RecyclerView recyclerView;
     CategoryAdapter categoryAdapter;
+    ImageView image_account;
+    TextView tv_name_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,14 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+
+        tv_name_account = findViewById(R.id.tv_name_account);
+        image_account = findViewById(R.id.image_account);
+        tv_name_account.setText(account.getName());
+        if(account.getImage()!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(account.getImage(), 0, account.getImage().length);
+            image_account.setImageBitmap(bitmap);
+        }
 
         categoryDAO = new CategoryDAO(this);
         categoryDAO.open();

@@ -69,7 +69,20 @@ public class ProductDAO {
 
     public List<Product> getProducts(int id_category){
         List<Product> products = new ArrayList<Product>();
-        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " WHERE " + DatabaseHelper.COLUMN_ID_CATEGORY_PRODUCT + " = " + id_category;
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " WHERE " + DatabaseHelper.COLUMN_ID_CATEGORY_PRODUCT + " = '" + id_category + "' and quantity_product >0";
+        Cursor cursor = database.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            do{
+                Product product = new Product(cursor);
+                products.add(product);
+            }while (cursor.moveToNext());
+        }
+        return products;
+    }
+
+    public List<Product> getProducts(int id_category, String name){
+        List<Product> products = new ArrayList<Product>();
+        String query = "SELECT * FROM " + DatabaseHelper.TABLE_PRODUCT + " WHERE " + DatabaseHelper.COLUMN_ID_CATEGORY_PRODUCT + " = '" + id_category + "' and quantity_product >0 and " + DatabaseHelper.COLUMN_NAME_PRODUCT + " like '%" + name + "%'";
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{

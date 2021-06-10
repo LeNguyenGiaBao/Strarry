@@ -160,8 +160,10 @@ public class AccountActivity extends AppCompatActivity {
 
     private void set_info_account(Account account) {
         name_account.setText(account.getName());
-        Bitmap bitmap = BitmapFactory.decodeByteArray(account.getImage(), 0, account.getImage().length);
-        image_account.setImageBitmap(bitmap);
+        if(account.getImage()!=null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(account.getImage(), 0, account.getImage().length);
+            image_account.setImageBitmap(bitmap);
+        }
     }
 
     @Override

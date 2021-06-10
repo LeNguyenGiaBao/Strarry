@@ -9,10 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private SharePreferenceClass SharedPreferenceClass;
     Integer id_category;
     String name_category;
-    TextView txt_category;
+    EditText edt_search;
+//    private List<Product> products = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +67,31 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-        txt_category = findViewById(R.id.txt_category);
-        txt_category.setText(name_category);
 
-//        toolbar = getSupportActionBar();
+        edt_search = findViewById(R.id.edt_search);
+        edt_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                List<Product> products = null;
+                if(s!=null) {
+                    products = productDAO.getProducts(id_category, s.toString());
+                } else {
+                    products = productDAO.getProducts(id_category);
+                }
+                productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
+                recyclerView.setAdapter(productAdapter);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
 
@@ -168,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setSelectedItemId(R.id.navigation_1);
+
+        edt_search.setText("");
         List<Product> products =  productDAO.getProducts(id_category);
         productAdapter = new ProductAdapter(getApplicationContext(), (ArrayList<Product>) products);
 
