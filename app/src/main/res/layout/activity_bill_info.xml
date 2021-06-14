@@ -76,7 +76,7 @@
                 android:layout_below="@id/orderSummary"
                 android:layout_alignParentRight="true"
                 android:textSize="20sp"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="10dp"/>
 
             <ImageView
                 android:id="@+id/qrcode"

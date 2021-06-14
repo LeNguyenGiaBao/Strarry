@@ -14,6 +14,7 @@ import hcmute.edu.vn.mssv18110251.Adapter.SharePreferenceClass;
 import hcmute.edu.vn.mssv18110251.Admin.AdminActivity;
 import hcmute.edu.vn.mssv18110251.CategoryActivity;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
+import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
 import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.R;
 
@@ -44,6 +45,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(forgetpass);
             }
         });
+
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_CATEGORY);
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_PRODUCT);
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_ACCOUNT);
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_BILL);
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_BILL_PRODUCT);
+//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_CART);
 
         go_to_register = findViewById(R.id.go_to_register);
         go_to_register.setOnClickListener(new View.OnClickListener() {

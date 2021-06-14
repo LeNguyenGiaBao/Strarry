@@ -73,6 +73,7 @@ public class CartActivity extends AppCompatActivity {
         Log.d("DATE", String.valueOf(date));
 
         Account account = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+        Log.d("Cart Activity", String.valueOf(account.getId()));
         txt_total_price = findViewById(R.id.total_price);
         txt_total_price.setText(currencyFormatter.format(0));
 
@@ -230,7 +231,7 @@ public class CartActivity extends AppCompatActivity {
                 List<Cart> list_purchase = product_cart_adapter.get_product_to_purchase();
                 Log.d("Length of list purchase", String.valueOf(list_purchase.size()));
                 if(list_purchase.size()>0){
-                    Bill bill = new Bill(account.getId(), 10000, (float) 0.0, String.valueOf(month), String.valueOf(date));
+                    Bill bill = new Bill(account.getId(), 0, (float) 0.0, String.valueOf(month+1), String.valueOf(date));
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }

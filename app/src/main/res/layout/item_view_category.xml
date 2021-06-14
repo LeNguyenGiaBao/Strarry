@@ -26,7 +26,7 @@
                 android:layout_height="150dp"
                 android:id="@+id/categoryImage"
                 android:layout_marginTop="4dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="fitEnd"/>
 
             <TextView
                 android:layout_width="wrap_content"
