@@ -15,11 +15,12 @@ import hcmute.edu.vn.mssv18110251.Admin.AdminActivity;
 import hcmute.edu.vn.mssv18110251.CategoryActivity;
 import hcmute.edu.vn.mssv18110251.DAO.AccountDAO;
 import hcmute.edu.vn.mssv18110251.Database.DatabaseHelper;
+import hcmute.edu.vn.mssv18110251.FaceRecognizeActivity;
 import hcmute.edu.vn.mssv18110251.Model.Account;
 import hcmute.edu.vn.mssv18110251.R;
 
 public class LoginActivity extends AppCompatActivity {
-
+//    insert into account (password_account, phone_account, role_account) values ('a', '0798725333', 0)
     TextView go_to_register, phone, password, forget_password;
 
     Button btn_login;
@@ -30,12 +31,31 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        Log.d("Login", "-----------------------------------------------------------------");
 
         accountDAO = new AccountDAO(this);
         accountDAO.open();
 
         phone = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
+
+        Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
+        if(account1!=null){
+            if(account1.getRole()==0){
+                if(account1.getImage()!=null)
+                {
+                    Log.d("Login", "-----------------------------------------------------------------");
+                    Intent check_face = new Intent(getApplicationContext(), FaceRecognizeActivity.class);
+                    Log.d("Login", "-----------------------------------------------------------------");
+//                    check_face.putExtra("FACE", account1.getImage());
+                    Log.d("Login", "-----------------------------------------------------------------");
+                    startActivity(check_face);
+                } else {
+                    Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
+                    startActivity(homePage);
+                }
+            }
+        }
 
         forget_password = findViewById(R.id.forget_password);
         forget_password.setOnClickListener(new View.OnClickListener() {
@@ -46,13 +66,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_CATEGORY);
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_PRODUCT);
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_ACCOUNT);
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_BILL);
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_BILL_PRODUCT);
-//        Log.d("cate", DatabaseHelper.DATABASE_CREATE_CART);
-
         go_to_register = findViewById(R.id.go_to_register);
         go_to_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent_register);
             }
         });
-
-        Account account1 = (Account)SharedPreferenceClass.getInstance(getBaseContext()).get("account");
-        if(account1!=null){
-            if(account1.getRole()==0){
-                Intent homePage = new Intent(getApplicationContext(), CategoryActivity.class);
-                startActivity(homePage);
-            }
-        }
 
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
