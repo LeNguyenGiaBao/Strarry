@@ -16,7 +16,7 @@ public class MobileFaceNet {
     private static final String MODEL_FILE = "MobileFaceNet.tflite";
 
     public static final int INPUT_IMAGE_SIZE = 112; // 需要feed数据的placeholder的图片宽高
-    public static final float THRESHOLD = 0.7f; // 设置一个阙值，大于这个值认为是同一个人
+    public static final float THRESHOLD = 0.8f; // 设置一个阙值，大于这个值认为是同一个人
 
     private Interpreter interpreter;
 

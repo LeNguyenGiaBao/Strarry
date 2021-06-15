@@ -235,7 +235,7 @@ public class CartActivity extends AppCompatActivity {
                     if(billDAO.addBill(bill)){
                         Toast.makeText(getBaseContext(), "Add Bill Successfully", Toast.LENGTH_SHORT).show();
                     }
-                    Integer id_bill = billDAO.get_last_inserted_id(1);
+                    Integer id_bill = billDAO.get_last_inserted_id(account.getId());
                     for(Cart cart: list_purchase){
                         Integer id_product = cart.getId_product();
                         Integer amount = cart.getAmount();

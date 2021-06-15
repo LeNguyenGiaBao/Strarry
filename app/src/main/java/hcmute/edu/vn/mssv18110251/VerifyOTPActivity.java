@@ -89,8 +89,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                     btnVerify.setVisibility(View.VISIBLE);
                                     if(task.isSuccessful()){
                                         Log.d("Verify", "Success");
-                                        byte[] byteArray = new byte[0];
-                                        Account account = new Account("", password, phoneNumber, "", 0, "", byteArray);
+//                                        byte[] byteArray = new byte[0];
+                                        Account account = new Account("", password, phoneNumber, "", 0, "", null);
                                         boolean success = accountDAO.addAccount(account);
                                         if(!success) {
                                             Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_LONG).show();
